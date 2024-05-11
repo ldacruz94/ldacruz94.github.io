@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Options Form</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    color: #333;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .radio-label {
+    margin-left: 10px;
+  }
+  .submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block; /* Ensure button takes its own line */
+  }
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Selecione seu tema de estudo</h2>
+  <form>
+    <div class="form-group">
+      <div class="radio-group">
+        <input type="radio" id="churchHistory" name="studyTopic" value="churchHistory">
+        <label for="churchHistory" class="radio-label">História da Igreja Primitiva</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="apologetics" name="studyTopic" value="apologetics">
+        <label for="apologetics" class="radio-label">Apologética</label>
+      </div>
+      <!-- Repeat for other options -->
+      <div class="radio-group">
+        <input type="radio" id="introToJohn" name="studyTopic" value="introToJohn">
+        <label for="introToJohn" class="radio-label">Introdução ao Evangelho de João</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="canonBible" name="studyTopic" value="canonBible">
+        <label for="canonBible" class="radio-label">Cânon da Bíblia</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="introToJudges" name="studyTopic" value="introToJudges">
+        <label for="introToJudges" class="radio-label">Introdução aos Juízes</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="readEpistles" name="studyTopic" value="readEpistles">
+        <label for="readEpistles" class="radio-label">Como ler as Epístolas</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="sanctification" name="studyTopic" value="sanctification">
+        <label for="sanctification" class="radio-label">Doutrina da Santificação</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" id="angelology" name="studyTopic" value="angelology">
+        <label for="angelology" class="radio-label">Angelologia</label>
+      </div>
+    </div>
+    <button type="submit" class="submit-btn">Enviar</button>
+  </form>
+</div>
+
+</body>
+</html>
