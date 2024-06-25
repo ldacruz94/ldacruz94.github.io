@@ -40,7 +40,7 @@ export default function ReadingPage() {
       <section>
         <h1 className="font-medium text-2xl mb-8 tracking-tighter">reading 📚</h1>
         <p className="text-lg">
-          I'm a bookworm. I love reading all sorts of genres, but besides non-engineering books, 
+          I&apos;m a bookworm. I love reading all sorts of genres, but besides non-engineering books, 
           I like to brush up on my knowledge and skills by reading books on data structures and algorithms,
           machine learning, networking, and devops. As well as particular programming languages such as Java,
           Python, C#, C++, JS, etc.
@@ -50,7 +50,7 @@ export default function ReadingPage() {
           around 60 paperback/hard cover books and textbooks, 
           and a little over 100 books on another digital platform.
         </p>
-        <p className="text-lg pt-5">Here's some of the books I've read:</p>
+        <p className="text-lg pt-5">Here&apos;s some of the books I&apos;ve read:</p>
 
         <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
         {

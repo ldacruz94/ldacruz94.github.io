@@ -12,7 +12,7 @@ export default function WorkPage() {
       <div className="prose prose-neutral dark:prose-invert">
         <p className='text-lg'>
           Constantly working to improve the state of development wherever I work and building cool stuff! 
-          Here are the some great places I'm working and have worked at in the past.
+          Here are the some great places I&apos;m working and have worked at in the past.
         </p>
         <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
         <h2 className="font-medium text-xl mb-1 tracking-tighter">Ecolab</h2>
@@ -31,7 +31,7 @@ export default function WorkPage() {
         </p>
         <p>
           Joined as a contractor in 2021. A little side hustle of mine where I have been writing automation scripts
-          to test out the functionality of some of the company's apps as well as automating manual processes.
+          to test out the functionality of some of the company&apos;s apps as well as automating manual processes.
         </p>
         <hr className="my-6 border-neutral-100 dark:border-neutral-800" />
         <h2 className="font-medium text-xl mb-1 tracking-tighter">Constant Contact</h2>

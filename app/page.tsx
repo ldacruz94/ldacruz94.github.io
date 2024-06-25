@@ -22,19 +22,19 @@ export default function Home() {
   return (
     <section>
       <div className='flex items-center mb-10 justify-start font-medium text-2xl mb-8 tracking-tighter'>
-        <h1 className="text-2xl mt-2 font-bold">Hi there! I'm Lucas Da Cruz</h1> 
+        <h1 className="text-2xl mt-2 font-bold">Hi there! I&apos;m Lucas Da Cruz</h1> 
         <div className="animate-waving-hand text-3xl">👋</div>
       </div>
       <div className="text-lg dark:prose-invert">
         <p className="prose prose-neutral dark:prose-invert text-lg">
-          I'm a Software Engineer who is joyfully adventuring through the world of software, constantly learning new things.
+          I&apos;m a Software Engineer who is joyfully adventuring through the world of software, constantly learning new things.
           I currently <Link href="/work">work</Link> for <Badge href="https://www.ecolab.com/">Ecolab</Badge> as a Software Engineer 
           and <Badge href="https://www.torchlight.care/">Torchlight</Badge> as a contractor.
         </p>
       </div>
       <div className="prose prose-neutral dark:prose-invert text-lg">
         <p>
-          I'm getting ready to write some educational content via my blog on software engineering, so stay tuned!
+          I&apos;m getting ready to write some educational content via my blog on software engineering, so stay tuned!
         </p>
       </div>
     </section>
