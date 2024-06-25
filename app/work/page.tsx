@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Work',
   description: 'A summary of my work and where I have contributed to.',
 };
 
