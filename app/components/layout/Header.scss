@@ -1,0 +1,14 @@
+
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .social-icon {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

@@ -1,5 +1,12 @@
+'use client'
+
 import Link from 'next/link';
+import './Header.scss';
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import './HamburgerIcon';
+import { HamburgerIcon } from './HamburgerIcon';
+import { GitHubIcon } from './GitHubIcon';
+import { LinkedInIcon } from './LinkedInIcon';
 
 
 const navItems = {
@@ -17,7 +24,8 @@ const navItems = {
   }
 };
 
-export function Navbar() {
+export function Header() {
+
   return (
     <aside className="-ml-[8px] mb-16 tracking-tight">
       <div className="lg:sticky lg:top-20">
@@ -39,12 +47,9 @@ export function Navbar() {
             })}
           </div>
           <div className="flex items-center space-x-4 justify-end">
-            <Link href="https://github.com/ldacruz94" className="text-lg hover:text-neutral-800 dark:hover:text-neutral-200" target='_blank'>
-              <FaGithub aria-label="GitHub" size='1.5em' />
-            </Link>
-            <Link href="https://www.linkedin.com/in/lucas-da-cruz-992738110/" className="text-lg hover:text-neutral-800 dark:hover:text-neutral-200" target='_blank'>
-              <FaLinkedin aria-label="LinkedIn" size='1.5em' />
-            </Link>
+            <HamburgerIcon className="hamburger" />
+            <GitHubIcon className='social-icon' />
+            <LinkedInIcon className='social-icon' />
           </div>
         </nav>
       </div>
