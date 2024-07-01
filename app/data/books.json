@@ -4,7 +4,7 @@
         "title": "Python Programming: An Introduction to Computer Science",
         "author": "John Zelle",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "My first programming book! It really laid down the basics for me, covering things like variables, conditional statements, and functions. Plus, there were these cool little projects to follow along, which made learning fun. Python was technically my second language after JavaScript, but it was the language that really taught my how to program.",
+        "description": "My first programming book! It laid down the basics on CS for me, covering things like variables, conditional statements, functions, etc. There were a couple of cool little projects that made the experience fun. Python is technically my second programming language since I dabbled with JavaScript for a bit, but it is the language that really taught my how to program.",
         "amazonLink": "https://a.co/d/hDbaFAp"
     },
     {
@@ -12,7 +12,7 @@
         "title": "Automate the Boring Stuff with Python",
         "author": "Al Sweigart",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "An absolute game changer. While the first book I read on Python introduced me to the conceptual and abstract ideas of CS, this second book helped me understand how to better put that knowledge into practice. After I finished reading it, I was better equipped to automate some previously manual tasks back at my job and helped me become more creative in figuring out ways to automate things not covered in the book.",
+        "description": "An absolute game changer for me. While the first book I read on Python introduced me to the conceptual and abstract ideas of CS, this second book helped me understand how to better put that knowledge into practice. After I finished reading it, I was better equipped to automate some previously manual tasks back at my job and helped me become more creative in figuring out ways to automate other tasks not covered in the book and also programming in general.",
         "amazonLink": "https://a.co/d/cuv4PhG"
     },
     {
@@ -20,7 +20,7 @@
         "title": "How Computers Work",
         "author": "Matthew R Baker",
         "rating": "⭐⭐⭐⭐",
-        "description": "Straight forward and to the point. The first part of the book is what I was most interested in. Being a completely non-technical person a few years ago, this book helped me understand computers a little bit better. The rest of the 2/3rds of the book are also useful to learn a little bit more about maintenance and solving computer issues.",
+        "description": "Straightforward and to the point. The first part of the book is what I was most interested in. Being a completely non-technical person a few years ago, this book helped me understand computers better. The rest of the 2/3rds of the book are also useful to learn a little bit more about maintenance and solving computer issues.",
         "amazonLink": "https://a.co/d/j4gc5jc"
     },
     {
@@ -28,7 +28,7 @@
         "title": "Networking Made Easy",
         "author": "James Bernstein",
         "rating": "⭐⭐⭐⭐",
-        "description": "A good intro to computer networking. It covers some basic concepts like networking protocols, IP addressing, and the internet. I use it as refresher whenever I need it. If you're a complete novice to networking, I highly recommend this one.",
+        "description": "A good introduction to computer networking. It covers some basic concepts like networking protocols, IP addressing, and the internet. I use it as refresher whenever I need it. If you're a complete novice to networking, I highly recommend this one.",
         "amazonLink": "https://a.co/d/8UptIBo"
     },
     {
@@ -36,7 +36,7 @@
         "title": "SQL: The Ultimate Beginner's Guide to Learn SQL Programming Step-by-Step",
         "author": "Mark Reed",
         "rating": "⭐⭐⭐",
-        "description": "A decent book on SQL. If you're starting out learning it for the first time, there may be better options there, but this is still an okay option if you need to understand the syntax a little bit better. It covers additional topics like joins, unions, DB adminstration, creating SQL views, and a few other things.",
+        "description": "A decent book on SQL if you're a beginner although there are some better options out there. It covers additional topics like joins, unions, DB adminstration, creating SQL views, and a few other basic things.",
         "amazonLink": "https://a.co/d/4D4VBNy"
     },
     {
@@ -44,7 +44,7 @@
         "title": "HTTP: The Definitive Guide",
         "author": "David Gourley, Brian Totty, Marjorie Sayer, Anshu Aggarwal, Sailu Reddy",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "This book is amazing! I'd say this is one of the most, if not the most impactful books of my career that made me really understand HTTP better. I was always curious about how web apps worked especially because I was trying to automate functionality at work without using selenium, but had no idea how things were operating on the web apps and sites I was working with. Not to sound cheesy, but this book helped me understand a whole new side of programming and engineering. Highly recommend it if you're a beginner or need a reference to HTTP.",
+        "description": "This book is amazing! This is one of the most impacting books in my career that made me really understand HTTP better. I was always curious about how web apps worked when I was starting out. Especially because I was trying to automate functionality at work without using web-emulating technologies like Selenium, but had no idea how things were operating from a network perspective. Highly recommend it if you're a beginner or need a reference to HTTP.",
         "amazonLink": "https://a.co/d/byhgj0f"
     },
     {
@@ -52,7 +52,7 @@
         "title": "Ry's Git Tutorial",
         "author": "Ryan Hodson",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "Simple and informative. This is a great introduction to learning version control and Git. Granted, you won't probably use all of features in Git that are taught in this book, but you'll learn the most essential parts that you'll most likely use in projects and in the real world.",
+        "description": "Simple and informative. This is a great introduction to learning version control and Git. You won't probably use all of git features that are taught in this book, but you'll learn the most essential parts that you'll most likely use in projects and in the real world.",
         "amazonLink": "https://a.co/d/bhacfmw"
     },
     {
@@ -68,7 +68,7 @@
         "title": "Effective Java",
         "author": "Joshua Bloch",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "Excellent book! As the name implies, you'll come off being a better Java developer. Some concepts taught in this book are not just applicable to Java! Some other languages may have a different philosophy or flavor of how to implement certain concepts like Generics, but this book will help you make better sense of it all. Overall, I feel that this book made me a better engineer. The parts that stand out the most in terms of being most impactful were on OOP, intefaces, generics, and concurrency.",
+        "description": "Excellent book! You'll become a better Java developer after learning and applying some of content in here. Some concepts taught in this book are not just applicable to Java! Other languages may have a different philosophy or flavor on how to implement certain concepts like generics, but this book will help you make better sense of it all. Overall, I feel that this book made me a better engineer. The parts that stand out the most in terms of being most impactful were on OOP, intefaces, generics, and concurrency.",
         "amazonLink": "https://a.co/d/2bAXY4u"
     },
     {
@@ -76,7 +76,7 @@
         "title": "The Pragmatic Programmer: Your Journey To Mastery",
         "author": "David Thomas, Andrew Hunt",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "Whether you're a beginner or tenured software engineer, this is one of those books where you don't want to pass from this life to the next without reading. Lots of gems in here, but if I could highlight one it's that you should never depend on your job to learn new tools and techniques. Always strive to learn on your own. Your job and school will always have certain tools and techniques in place for you when you're working and studying, but don't let that limit you from trying new things on your own time.",
+        "description": "Whether you're a beginner or tenured software engineer, this is one of those books where you don't want to pass from this life to the next without reading. Lots of gems in here, but if I could highlight only one it's that you should never depend on your job to learn new tools and techniques. Always strive to learn on your own. Your job and school will always have certain tools and techniques in place for you when you're working and studying, but don't let that limit you from trying new things on your own time.",
         "amazonLink": "https://a.co/d/9tgeouk"
     },
     {
@@ -84,7 +84,7 @@
         "title": "Data Engineering with Python",
         "author": "Paul Crickard",
         "rating": "⭐⭐⭐⭐",
-        "description": "A good conceptual foundation into DE. Was interested to know more about the field and see common practices with Python. The title is slightly misleading in that it covers a lot of NiFi. Not a bad thing necessarily, but perhaps a change of title might make more sense. The examples were a bit outdated and I had to look up a bit of documentation to get through the examples. Tech changes fast though so it's to be expected sometimes.",
+        "description": "A light introduction into data engineering. The reason decided to read this was because I was interested to know more about the field and see common practices with Python. The title is slightly misleading though in that it covers a lot of NiFi. Not a bad thing necessarily, but perhaps a change of title might make more sense. The examples were a bit outdated and I had to look up a bit of documentation to get through the examples. Tech changes fast though so it's to be expected sometimes.",
         "amazonLink": "https://a.co/d/7et91Vj"
     },
     {
@@ -92,7 +92,7 @@
         "title": "Explain the Cloud Like I'm 10",
         "author": "Todd Hoff",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "Amazing explaination of what the \"cloud\" and cloud computing is. The author explains things in such simplicity without over-simplifying the concepts of the cloud. Really helped me understand what the cloud is all about. The author includes lots of nice visuals too to help visualize what the data centers look like that provide all sorts of cloud services.",
+        "description": "Amazing explanation on what the \"cloud\" and cloud computing is. The author explains things succinctly without over-simplifying the concepts of the cloud. It helped me understand what the cloud is all about. The author includes a profusion of nice images and visuals too to help visualize what some data centers around the world look like that provide cloud services.",
         "amazonLink": "https://a.co/d/0qj3Srb"
     },
     {
@@ -100,7 +100,7 @@
         "title": "Soft Skills",
         "author": "John Sonmez",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "An excellent book that covers everything from how to better market yourself as a software engineer, to fitness lifestyle advice, to financial advice, and to stoicism (I'm serious). The advice on how to market yourself better was the highlight for me from the entire book and a huge reason for why I decided to start building my own site. I highly recommend it.",
+        "description": "An excellent book that covers everything from how to better market yourself as a software engineer, to fitness lifestyle advice, to financial advice, to stoicism, and a couple of other topics. The advice on how to market yourself better was the highlight for me from the entire book and a huge reason for why I decided to start building my own site. I highly recommend it.",
         "amazonLink": "https://a.co/d/6ChKCSE"
     },
     {
@@ -108,7 +108,7 @@
         "title": "A Common-Sense Guide to Data Structures and Algorithms",
         "author": "Jay Wengrow",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "Wengrow does an excellent job explaining a variety of data structures and algorithms in this book. It's very language agnostic, so he uses different of programming languages to explain different concepts which I found refreshing. Highly recommend it if you're a beginner programmer and need a gentle introduction into data structures and algorithms. I find that it also serves as a good reference.",
+        "description": "Wengrow does an excellent job explaining a variety of data structures and algorithms in this book. He uses a language agnostic approach in teaching the various concepts. Highly recommend it if you're a beginner programmer and need a gentle introduction into data structures and algorithms. I find that it also serves as a good reference.",
         "amazonLink": "https://a.co/d/5WflUdK"
     },
     {
@@ -124,7 +124,7 @@
         "title": "Mastering API Architecture",
         "author": "James Gough, Daniel Bryant, Matthew Auburn",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "Excellent book on API architecture. The authors explain the design aspects of creating your own API whether in REST or RPC. One of the things that stand out for me from this book is the content on service meshes and API gateways. Very informative and a great reference when designing your own APIs.",
+        "description": "Excellent book on API architecture. The authors explain the design aspects of creating your own API whether in REST or RPC. One of the things that stand out to me from this book is the content on service meshes and API gateways. Very informative and a great reference when designing your own APIs.",
         "amazonLink": "https://a.co/d/4Llk2XM"
     },
     {
@@ -132,7 +132,7 @@
         "title": "Code: The Hidden Language of Computer Hardware and Software",
         "author": "Charles Petzold",
         "rating": "⭐⭐⭐⭐⭐",
-        "description": "One of my first books I read when I started trying to get into software engineering. It starts off with two best friends communicating through non-binary code and builds off from there to explain the development of the binary code today used in our machines. Petzold does a great job explaining some rather difficult concepts in a very easy and understandable way. If you have a strong curiosity to understand how computers operate and work, then I highly recommend this.",
+        "description": "One of my first books I read when I started my journey in software engineering. It starts off with two best friends communicating through non-binary code and builds off from there to explain the development of the binary code today used in our machines. Petzold does a great job explaining some rather difficult concepts in a very easy and understandable way. If you have a strong curiosity to understand how computers operate and work, then I highly recommend this.",
         "amazonLink": "https://a.co/d/1LbhtIu"
     },
     {
