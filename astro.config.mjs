@@ -9,5 +9,6 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://ldacruz94.github.io/',
+    base: 'ldacruz.github.io',
     integrations: [mdx(), sitemap(), tailwind()],
 });
