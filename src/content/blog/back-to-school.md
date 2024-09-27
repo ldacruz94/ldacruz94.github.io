@@ -1,9 +1,11 @@
 ---
-title: 'Back to School: Why I Went Back'
-description: 'Exploring my journey of returning to education and pursuing a career in software engineering.'
+title: 'Back to School: Why I Went Back' 
+description: 'Exploring my journey of returning to education'
 pubDate: 'Sep 26, 2024'
 heroImage: '/blog-back-to-school.jpg'
 ---
+
+### 📚 Back to School
 
 For years, I wanted to pursue a higher level of education. I wasn't able to for a long time due to financial constraints and my inability to receive financial aid because of my previous immigration status in the country. It was tough accepting that I couldn’t go to school. The weight of that reality gnawed at me for years, as I watched others move forward in their academic pursuits while I stood still, wanting more for myself but feeling helpless.
 
@@ -28,7 +30,7 @@ Of course, this journey won’t be easy. Balancing school with a full-time job a
 ### Conclusion:
 Returning to school isn’t just about securing a better job or earning a degree for me—it’s about reclaiming my path, feeding my curiosity, and opening doors to new opportunities. While my self-education has been invaluable, this formal journey represents the next chapter in my pursuit of knowledge and personal development. Education, whether formal or self-taught, has always been a cornerstone in my life, and now, I’m building on that foundation to reach new heights. I’m excited to see where this road will lead and to discover the possibilities that lie ahead.
 
-### Some questions for reflection:
+### ❔ Some questions for reflection:
 
 As I reflect on my journey back to school and the challenges I've faced, here are some questions I invite you to think about:
 
@@ -42,4 +44,4 @@ As I reflect on my journey back to school and the challenges I've faced, here ar
 
 5. **What new skills or fields of knowledge excite you? How can you start exploring them today, even in small ways?**
 
-Take some time to reflect on these questions and consider how they apply to your own life. I’d love to hear your thoughts—feel free to reach out if you want to share your reflections!
+Take some time to reflect on these questions and consider how they apply to your own life. I’d love to hear your thoughts—feel free to [reach out](mailto:lucaspavesi11@gmail.com) if you want to share your reflections!
