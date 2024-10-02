@@ -2,7 +2,7 @@
 title: 'Back to School: Why I Went Back' 
 description: 'Exploring my journey of returning to education'
 pubDate: 'Sep 26, 2024'
-heroImage: '/ldacruz.github.io/blog-back-to-school.jpg'
+heroImage: '/blog-back-to-school.jpg'
 ---
 
 ### 📚 Back to School
