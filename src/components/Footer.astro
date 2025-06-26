@@ -3,7 +3,7 @@ const today = new Date();
 ---
 
 <footer>
-	Copyright &copy; {today.getFullYear()} | All rights reserved.
+	Copyright &copy; Lucas Da Cruz {today.getFullYear()} | All rights reserved.
 	<div class="social-links">
 		<a href="https://www.linkedin.com/in/lucas-da-cruz-992738110" target="_blank">
 				<span class="sr-only">Visit my LinkedIn profile</span>
@@ -29,12 +29,12 @@ const today = new Date();
 					d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1 0.9 2 2 2h16c1.1 0 2-0.9 2-2V6c0-1.1-0.9-2-2-2zm0 4.75L12 12.5 4 8.75V6l8 4.5 8-4.5v2.75z"
 				  ></path>
 				</svg>
-			  </a>	
+			</a>	
 	</div>
 </footer>
 <style>
 	footer {
-		padding: 1em 1em 1em 1em;
+		padding: 9em 1em 1em 1em;
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
 		color: rgb(var(--gray));
 		text-align: center;
@@ -46,10 +46,11 @@ const today = new Date();
 		margin-top: 1em;
 	}
 	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
+		color: rgb(var(--gray)); 
+		transition: color 0.3s ease;
 	}
 	.social-links a:hover {
-		color: rgb(var(--gray-dark));
+		color: #1da1f2; 
+		text-decoration: none;
 	}
 </style>
