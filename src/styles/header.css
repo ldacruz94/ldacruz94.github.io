@@ -1,0 +1,56 @@
+header {
+    margin: 0;
+    padding: 0 1em;
+}
+header h2 {
+    margin: 0;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav a {
+    padding: 1em 0.5em;
+    color: var(--black);
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+}
+nav a.active {
+    text-decoration: none;
+    border-bottom-color: var(--accent);
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+#header_title a {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 0.5s;
+}
+
+#header_about {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+}
+
+#header_blog {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1.5s;
+}
+
+#header_resume {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2s;
+}
+
+@media (max-width: 720px) {
+    .external-links {
+        display: none;
+    }
+}

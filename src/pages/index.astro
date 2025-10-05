@@ -1,8 +1,11 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+import SocialMediaLine from '../components/SocialMediaLine.astro';
+import EmailLine from '../components/EmailLine.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, EMAIL } from '../consts';
+import "../styles/about.css";
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
@@ -13,15 +16,39 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>👋🏼 Hi, there!</h1> 
-			<h2>I'm Lucas Da Cruz!</h2>
-			<p>
-				I am a Software Engineer 🧑‍💻 and a bookworm 🤓📚
-			</p>
-			<p>
-				I currently work full-time at <a class="underline" href="https://www.ecolab.com/" target="_blank">Ecolab</a> as a Software Engineer and part-time as an automation engineer contractor for <a class="underline" href="https://www.torchlight.care/" target="_blank">Torchlight</a>. 			
-			</p>
+			<section id="about_section">
+				<h5 class="delay_order1"><span class="wave-emoji">👋🏼</span> Hi, there! I'm <b>Lucas Da Cruz</b>.</h5> 
+				<p class="delay_order2">
+					I am a Software Engineer passionate about building efficient and scalable applications and systems. 
+					My main focus is on backend development, but I also enjoy working on frontend and DevOps tasks as well as
+					evolving my skills as an engineer in different technologies, such as
+					AI, robotics, embedded systems, and cloud computing.
+				</p>
+				<p class="delay_order3">
+					Currently, I am a Software Engineer at <a class="underline" href="https://www.ecolab.com/" target="_blank">Ecolab</a>
+					building internal tools to help various teams (both engineering and non-engineering) and divisions at our organization be more efficient 
+					and productive. I also assist in maintaining and improving the company's software development
+					lifecycle and DevOps practices.
+				</p>
+				<p class="delay_order4">
+					In addition to my full-time job, I work as a freelance automation engineer for startups and small businesses, helping them
+					to automate their processes and workflows using various tools and technologies. Currently, I 
+					provide my services as a freelance engineer to 
+					<a class="underline" href="https://www.torchlight.care/" target="_blank">Torchlight</a>, where
+					I introduce new tools to help improve their QE tests and develop internal tools to automate 
+					and enhance their processes.	
+				</p>
+				<p class="delay_order5">
+					During my free time, I enjoy learning new technologies, reading books, blogging, cooking, and spending time
+					with my wife and three kids.
+				</p>
+			</section>
 		</main>
-		<Footer />
+
+		<div class="sticky-container">
+			<SocialMediaLine />
+			<EmailLine email={EMAIL} />
+		</div>	
+		<Footer />	
 	</body>
 </html>

@@ -1,0 +1,51 @@
+.delay_order1 {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+}
+
+.delay_order2 {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1.5s;
+}
+
+.delay_order3 {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2s;
+}
+
+.delay_order4 {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2.5s;
+}
+
+.delay_order5 {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 3s;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(30deg); }
+}
+
+h5 b:has(+ .wave-emoji),
+h5 .wave-emoji {
+    display: inline-block;
+    animation: wave 1s infinite;
+}
+
+h5 .wave-emoji {
+    font-size: 1.5em;
+}
+
+.sticky-container {
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 1s;
+}
