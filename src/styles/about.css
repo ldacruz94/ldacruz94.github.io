@@ -40,7 +40,7 @@ h5 .wave-emoji {
 }
 
 h5 .wave-emoji {
-    font-size: 1.5em;
+    font-size: 1.1em;
 }
 
 .sticky-container {
@@ -48,4 +48,10 @@ h5 .wave-emoji {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 1s;
+}
+
+@media (max-width: 410px) {
+    h5 {
+        font-size: 1em;
+    }
 }
