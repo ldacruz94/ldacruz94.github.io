@@ -1,12 +1,12 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { HEADER_TITLE } from '../consts';
 import "../styles/header.css";
 ---
 
 <header>
 	<nav>
-		<h2 id="header_title"><a class="font-bold" href="/">{SITE_TITLE}</a></h2>
+		<h2 id="header_title"><a class="font-bold" href="/">{HEADER_TITLE}</a></h1>
 		<div class="internal-links">
 			<HeaderLink id="header_about" href="/">About</HeaderLink>
 			<HeaderLink id="header_blog" href="/blog">Blog</HeaderLink>

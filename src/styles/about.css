@@ -49,9 +49,3 @@ h5 .wave-emoji {
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 1s;
 }
-
-@media (max-width: 410px) {
-    h5 {
-        font-size: 1em;
-    }
-}

@@ -47,7 +47,7 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 1.7;
 }
 main {
@@ -182,4 +182,16 @@ hr {
 	footer {
 		display: none;
 	}
+}
+
+@media (max-width: 410px) {
+    h5 {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 1300px) {
+    h5, p {
+        font-size: 1.2em
+    }
 }

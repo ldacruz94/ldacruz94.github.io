@@ -2,7 +2,6 @@
 title: 'New Year: New Year as a CS Student'
 description: 'Starting the year off as a CS student'
 pubDate: 'Jan 1, 2025'
-heroImage: '/new-year.png'
 ---
 
 ### 🎉 Happy New Year! 🎉

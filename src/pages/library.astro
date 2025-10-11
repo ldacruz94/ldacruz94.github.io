@@ -1,0 +1,154 @@
+---
+import Header from "../components/Header.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import SocialMediaLine from "../components/SocialMediaLine.astro";
+import EmailLine from "../components/EmailLine.astro";
+import { books } from "../data/books";
+import { EMAIL } from "../consts";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title="Library" description="A collection of books I've read and what I've learned from them." />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.book-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 2em;
+			}
+			.book-item {
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+			}
+			.book-content {
+				display: flex;
+				align-items: flex-start;
+				gap: 1em;
+			}
+			.book-image {
+				width: 150px;
+				height: auto;
+				border-radius: 4px;
+				box-shadow: var(--box-shadow);
+			}
+			.book-details {
+				flex: 1;
+			}
+			.book-details h4 {
+				margin: 0 0 0.5em 0;
+				font-size: 1rem; /* Smaller title */
+                font-weight: bold;
+			}
+			.book-details a {
+				color: rgb(var(--accent));
+				text-decoration: none;
+			}
+			.book-details a:hover {
+				text-decoration: underline;
+			}
+			hr {
+				border: none;
+				border-top: 1px solid rgb(var(--gray));
+				margin: 1em 0 0 0;
+			}
+			.filter-container {
+				display: flex;
+				align-items: center;
+				margin-bottom: 1em;
+			}
+			.filter-container label {
+				margin-right: 0.5em;
+				font-weight: bold;
+			}
+			.filter-container select {
+				padding: 0.5em;
+				border: 1px solid rgb(var(--gray));
+				border-radius: 4px;
+				font-size: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="title">
+				<h1>Library</h1>
+				<p>A collection of books I've read and what I've learned from them.</p>
+			</div>
+			<section>
+				<div class="filter-container">
+					<label for="tag-filter">Filter by tag:</label>
+					<select id="tag-filter" onchange="filterBooks(event)">
+						<option value="">All</option>
+						{Array.from(new Set(books.flatMap((book: { tags: string[] }) => book.tags))).map((tag: string) => (
+							<option value={tag}>{tag}</option>
+						))}
+					</select>
+				</div>
+
+				<ul class="book-list" id="book-list">
+					{books
+						.map((book) => (
+							<li class="book-item" data-tags={book.tags.join(',')}>
+								<div class="book-content">
+									<img src={book.image} alt={`Cover of ${book.title}`} class="book-image" />
+									<div class="book-details">
+										<h4><a href={book.link} target="_blank" rel="noopener noreferrer">{book.title} <span class="link-arrow">→</span></a></h4>
+										<p>{book.description}</p>
+									</div>
+								</div>
+								<hr />
+							</li>
+						))}
+				</ul>
+			</section>
+		</main>
+		<div class="sticky-container">
+			<SocialMediaLine />
+			<EmailLine email={EMAIL} />
+		</div>
+		<Footer />
+		<script>
+			declare global {
+				interface Window {
+					filterBooks: (event: any) => void;
+				}
+			}
+			
+			window.filterBooks = function (event) {
+				const filter = event.target.value;
+				const bookItems = document.querySelectorAll(".book-item");
+
+				bookItems.forEach((item) => {
+					const tags = item.getAttribute("data-tags")?.split(",") || [];
+					if (!filter || tags.includes(filter)) {
+						(item as HTMLElement).style.display = "flex";
+					} else {
+						(item as HTMLElement).style.display = "none";
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
