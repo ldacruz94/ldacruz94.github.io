@@ -1,0 +1,85 @@
+---
+import Header from "../components/Header.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import SocialMediaLine from "../components/SocialMediaLine.astro";
+import EmailLine from "../components/EmailLine.astro";
+import ProjectFilter from "../components/ProjectFilter.astro";
+import ProjectList from "../components/ProjectList.astro";
+import { professionalProjects } from "../data/projects/professional";
+import { freelanceProjects } from "../data/projects/freelance";
+import { personalProjects } from "../data/projects/personal";
+import { academicProjects } from "../data/projects/academic";
+import { EMAIL } from "../consts";
+
+const projects = [...professionalProjects, ...freelanceProjects, ...personalProjects, ...academicProjects];
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title="Projects" description="A collection of professional, freelance, and personal projects I've worked on." />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="title">
+				<h1>Projects</h1>
+				<p>A collection of noteworthy professional, freelance, academic, and personal projects I've worked on.</p>
+			</div>
+			<section>
+				<ProjectFilter projects={projects} />
+				<ProjectList projects={projects} />
+			</section>
+		</main>
+		<div class="sticky-container">
+			<SocialMediaLine />
+			<EmailLine email={EMAIL} />
+		</div>
+		<Footer />
+		<script>
+			declare global {
+				interface Window {
+					filterProjects: (event: any) => void;
+				}
+			}
+			
+			window.filterProjects = function (event) {
+				const typeFilter = (document.getElementById("type-filter") as HTMLSelectElement)?.value || "";
+				const techFilter = (document.getElementById("tech-filter") as HTMLSelectElement)?.value || "";
+				const projectItems = document.querySelectorAll(".project-item");
+
+				projectItems.forEach((item) => {
+					const type = item.getAttribute("data-type") || "";
+					const techs = item.getAttribute("data-technologies")?.split(",") || [];
+					
+					const typeMatch = !typeFilter || type === typeFilter;
+					const techMatch = !techFilter || techs.includes(techFilter);
+					
+					if (typeMatch && techMatch) {
+						(item as HTMLElement).style.display = "flex";
+					} else {
+						(item as HTMLElement).style.display = "none";
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

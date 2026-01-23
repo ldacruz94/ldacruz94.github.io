@@ -1,0 +1,117 @@
+---
+interface Props {
+	projects: Array<{
+		title: string;
+		link: string;
+		description: string;
+		technologies: string[];
+		type: string;
+		[key: string]: any;
+	}>;
+}
+
+const { projects } = Astro.props;
+---
+
+<ul class="project-list" id="project-list">
+	{projects.map((project) => (
+		<li class="project-item" data-type={project.type} data-technologies={project.technologies.join(",")}>
+			<div class="project-header">
+				<h4 class="project-title">
+					<a href={project.link} target="_blank" rel="noopener noreferrer">
+						{project.title}
+						<span class="link-arrow">→</span>
+					</a>
+				</h4>
+				<span class={`project-type ${project.type.toLowerCase()}`}>{project.type}</span>
+			</div>
+			<p class="project-description">{project.description}</p>
+			<ul class="technologies">
+				{project.technologies.map((tech: string) => (
+					<li class="tech-tag">{tech}</li>
+				))}
+			</ul>
+			<hr />
+		</li>
+	))}
+</ul>
+
+<style>
+	.project-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
+	}
+	.project-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75em;
+	}
+	.project-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+	.project-title {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: bold;
+	}
+	.project-title a {
+		color: rgb(var(--accent));
+		text-decoration: none;
+	}
+	.project-title a:hover {
+		text-decoration: underline;
+	}
+	.project-type {
+		display: inline-block;
+		padding: 0.25em 0.75em;
+		border-radius: 4px;
+		font-size: 0.85em;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+	.project-type.professional {
+		background-color: rgba(var(--accent-rgb), 0.15);
+		color: rgb(var(--accent));
+	}
+	.project-type.freelance {
+		background-color: rgba(136, 206, 250, 0.15);
+		color: #64b3e4;
+	}
+	.project-type.personal {
+		background-color: rgba(167, 243, 208, 0.15);
+		color: #42e096;
+	}
+	.project-description {
+		margin: 0;
+		line-height: 1.6;
+	}
+	.technologies {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.tech-tag {
+		display: inline-block;
+		padding: 0.25em 0.5em;
+		background-color: rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+	hr {
+		border: none;
+		border-top: 1px solid rgb(var(--gray));
+		margin: 1.5em 0 0 0;
+	}
+</style>
