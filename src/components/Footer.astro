@@ -40,6 +40,10 @@ const today = new Date();
 		color: rgb(var(--gray));
 		text-align: center;
 	}
+
+	:global(html[data-theme="light"]) footer {
+		border-top-color: rgba(0, 0, 0, 0.07);
+	}
 	.social-links {
 		display: flex;
 		justify-content: center;

@@ -184,4 +184,18 @@ const typeColors: Record<string, string> = {
 		color: rgb(var(--gray));
 		background: transparent;
 	}
+
+	:global(html[data-theme="light"]) .card-inner {
+		border-color: rgba(0, 0, 0, 0.07);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	}
+
+	:global(html[data-theme="light"]) .card-inner:hover {
+		border-color: rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09), 0 0 24px color-mix(in srgb, var(--card-accent) 22%, transparent);
+	}
+
+	:global(html[data-theme="light"]) .tech-tag {
+		border-color: rgba(0, 0, 0, 0.1);
+	}
 </style>

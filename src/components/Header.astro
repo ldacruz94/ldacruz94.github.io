@@ -6,14 +6,80 @@ import "../styles/header.css";
 
 <header>
 	<nav>
-		<h2 id="header_title"><a class="font-bold" href="/">{HEADER_TITLE}</a></h1>
-		<div class="internal-links">
-			<HeaderLink id="header_about" href="/">About</HeaderLink>
-			<HeaderLink id="header_blog" href="/blog">Blog</HeaderLink>
-			<HeaderLink id="header_projects" href="/projects">Projects</HeaderLink>
-			<HeaderLink id="header_library" href="/library">Library</HeaderLink>
-		</div>
+		<h2 id="header_title"><a class="font-bold" href="/">{HEADER_TITLE}</a></h2>
+		<div class="nav-right">
+			<div class="internal-links" id="nav-menu">
+				<HeaderLink id="header_about" href="/">About</HeaderLink>
+				<HeaderLink id="header_blog" href="/blog">Blog</HeaderLink>
+				<HeaderLink id="header_projects" href="/projects">Projects</HeaderLink>
+				<HeaderLink id="header_library" href="/library">Library</HeaderLink>
+			</div>
+			<button id="theme-toggle" aria-label="Toggle theme">
+				<svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+				</svg>
+				<svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+				</svg>
+			</button>
+			<button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+				<svg class="icon-lines" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+				</svg>
+				<svg class="icon-x" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+					<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+				</svg>
+			</button>
 		</div>
 	</nav>
 </header>
 
+<script>
+function initHeader() {
+	// Theme toggle
+	const toggleBtn = document.getElementById('theme-toggle');
+	const sun = document.getElementById('icon-sun');
+	const moon = document.getElementById('icon-moon');
+	if (toggleBtn && sun && moon) {
+		const syncIcons = () => {
+			const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+			(sun as HTMLElement).style.display = isLight ? 'none' : 'block';
+			(moon as HTMLElement).style.display = isLight ? 'block' : 'none';
+		};
+		syncIcons();
+		toggleBtn.addEventListener('click', () => {
+			const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+			const next = isLight ? 'dark' : 'light';
+			document.documentElement.setAttribute('data-theme', next);
+			localStorage.setItem('theme', next);
+			syncIcons();
+		});
+	}
+
+	// Hamburger
+	const hamburger = document.getElementById('hamburger');
+	const menu = document.getElementById('nav-menu');
+	const iconLines = hamburger?.querySelector('.icon-lines') as HTMLElement | null;
+	const iconX = hamburger?.querySelector('.icon-x') as HTMLElement | null;
+
+	if (hamburger && menu) {
+		hamburger.addEventListener('click', () => {
+			const isOpen = menu.classList.toggle('open');
+			hamburger.setAttribute('aria-expanded', String(isOpen));
+			if (iconLines) iconLines.style.display = isOpen ? 'none' : 'block';
+			if (iconX) iconX.style.display = isOpen ? 'block' : 'none';
+		});
+
+		menu.querySelectorAll('a').forEach(a => {
+			a.addEventListener('click', () => {
+				menu.classList.remove('open');
+				hamburger.setAttribute('aria-expanded', 'false');
+				if (iconLines) iconLines.style.display = 'block';
+				if (iconX) iconX.style.display = 'none';
+			});
+		});
+	}
+}
+
+document.addEventListener('astro:page-load', initHeader);
+</script>

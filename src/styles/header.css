@@ -9,69 +9,189 @@ header {
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
+
+html[data-theme="light"] header {
+    background: rgba(248, 249, 254, 0.88);
+    border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+
 header h2 {
     margin: 0;
 }
+
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+}
+
+.internal-links {
+    display: flex;
+    align-items: center;
+}
+
 nav a {
     padding: 1em 0.5em;
-    color: var(--black);
-    border-bottom: 4px solid transparent;
+    color: rgb(var(--black));
     text-decoration: none;
-}
-nav a.active {
-    text-decoration: none;
-    border-bottom-color: var(--accent);
 }
 
 nav a:hover {
     color: var(--accent);
 }
 
+/* Active indicator — desktop only (bottom border) */
+@media (min-width: 721px) {
+    nav a {
+        border-bottom: 4px solid transparent;
+    }
+    nav a.active {
+        border-bottom-color: var(--accent);
+    }
+}
+
+/* ── Staggered fade-in animations ── */
 #header_title a {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 0.5s;
 }
-
 #header_about {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 1s;
 }
-
 #header_blog {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 1.5s;
 }
-
 #header_projects {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 2s;
 }
-
 #header_library {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 2.5s;
 }
 
+#theme-toggle {
+    background: transparent;
+    border: none;
+    color: rgb(var(--black));
+    cursor: pointer;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 3s;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+#theme-toggle:hover {
+    color: var(--accent);
+    background: rgba(129, 140, 248, 0.08);
+}
+
+.hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: rgb(var(--black));
+    cursor: pointer;
+    padding: 0.5em;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2.5s;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.hamburger:hover {
+    color: var(--accent);
+    background: rgba(129, 140, 248, 0.08);
+}
+
+/* Suppress animations after first visit */
 html.header-animated #header_title a,
 html.header-animated #header_about,
 html.header-animated #header_blog,
 html.header-animated #header_projects,
-html.header-animated #header_library {
+html.header-animated #header_library,
+html.header-animated #theme-toggle,
+html.header-animated .hamburger {
     opacity: 1;
     animation: none;
 }
 
+/* ── Mobile ── */
 @media (max-width: 720px) {
+    .hamburger {
+        display: flex;
+    }
+
+    /* Links are in a hidden dropdown on mobile — no fade-in needed */
+    #header_about,
+    #header_blog,
+    #header_projects,
+    #header_library {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+
+    .internal-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        background: rgba(15, 17, 23, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 0.25em 0 0.75em;
+    }
+
+    html[data-theme="light"] .internal-links {
+        background: rgba(248, 249, 254, 0.97);
+        border-bottom-color: rgba(0, 0, 0, 0.07);
+    }
+
+    .internal-links.open {
+        display: flex;
+        animation: menuSlide 0.18s ease;
+    }
+
+    @keyframes menuSlide {
+        from { opacity: 0; transform: translateY(-4px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .internal-links a {
+        padding: 0.85em 1.5em;
+        border-left: 3px solid transparent;
+        font-size: 1.05em;
+    }
+
+    .internal-links a.active {
+        border-left-color: var(--accent);
+    }
+
     .external-links {
         display: none;
     }
