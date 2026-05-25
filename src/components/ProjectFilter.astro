@@ -103,11 +103,19 @@ const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies |
 </style>
 
 <script>
+	let filterController: AbortController | null = null;
+
 	function initFilters() {
+		if (filterController) filterController.abort();
+		filterController = new AbortController();
+		const { signal } = filterController;
+
 		const typePills = document.querySelectorAll<HTMLButtonElement>("#type-pills .pill");
 		const techPills = document.querySelectorAll<HTMLButtonElement>("#tech-pills .pill");
 		const items = document.querySelectorAll<HTMLElement>(".project-item");
 		const countEl = document.getElementById("visible-count");
+
+		if (!typePills.length) return;
 
 		let activeType = "";
 		let activeTech = "";
@@ -133,7 +141,7 @@ const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies |
 				pill.classList.add("active");
 				activeType = pill.dataset.value ?? "";
 				applyFilters();
-			});
+			}, { signal });
 		});
 
 		techPills.forEach((pill) => {
@@ -142,9 +150,10 @@ const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies |
 				pill.classList.add("active");
 				activeTech = pill.dataset.value ?? "";
 				applyFilters();
-			});
+			}, { signal });
 		});
 	}
 
 	initFilters();
+	document.addEventListener('astro:page-load', initFilters);
 </script>

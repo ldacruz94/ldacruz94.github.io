@@ -52,6 +52,22 @@ h5 .wave-emoji {
     font-size: 1.1em;
 }
 
+.stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin-top: 1.5em;
+}
+
+.stack-tag {
+    padding: 0.3em 0.85em;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.82em;
+    font-weight: 500;
+    color: rgb(var(--gray-dark));
+}
+
 .sticky-container {
     position: relative;
     opacity: 0;
@@ -62,4 +78,19 @@ h5 .wave-emoji {
 html.header-animated .sticky-container {
     opacity: 1;
     animation: none;
+}
+
+.tw-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 0.85em;
+    background: currentColor;
+    vertical-align: middle;
+    margin-left: 1px;
+    animation: tw-blink 0.7s step-end infinite;
+}
+
+@keyframes tw-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }

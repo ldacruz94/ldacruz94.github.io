@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -16,11 +17,143 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 
 <!-- Disable header intro animation after first visit -->
 <script is:inline>
-	if (sessionStorage.getItem('headerAnimated')) {
-		document.documentElement.classList.add('header-animated');
-	} else {
-		sessionStorage.setItem('headerAnimated', '1');
+	function applyHeaderAnimated() {
+		if (sessionStorage.getItem('headerAnimated')) {
+			document.documentElement.classList.add('header-animated');
+		} else {
+			sessionStorage.setItem('headerAnimated', '1');
+		}
 	}
+
+	applyHeaderAnimated();
+	document.addEventListener('astro:after-swap', applyHeaderAnimated);
+</script>
+
+<script is:inline>
+	function initScrollReveal() {
+		const els = document.querySelectorAll('.scroll-reveal');
+		if (!els.length) return;
+
+		els.forEach(el => {
+			const siblings = Array.from(el.parentElement?.querySelectorAll('.scroll-reveal') ?? []);
+			const idx = siblings.indexOf(el);
+			el.style.transitionDelay = `${idx * 60}ms`;
+		});
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.1 });
+
+		els.forEach(el => observer.observe(el));
+	}
+
+	initScrollReveal();
+	document.addEventListener('astro:page-load', initScrollReveal);
+</script>
+
+<script is:inline>
+	(function () {
+		if (window.__helixInit) return;
+		window.__helixInit = true;
+
+		function startHelix(canvas) {
+			if (canvas._helixRunning) return;
+			canvas._helixRunning = true;
+
+			const ctx = canvas.getContext('2d');
+			if (!ctx) return;
+
+			const W = canvas.width;
+			const H = canvas.height;
+			const cx = W / 2;
+			const turns = 4;
+			const omega = (2 * Math.PI * turns) / H;
+			const maxAmp = 7;
+
+			function draw(ts) {
+				const phase = ts * 0.0015;
+				ctx.clearRect(0, 0, W, H);
+
+				for (let pass = 0; pass < 2; pass++) {
+					const isFrontPass = pass === 1;
+					ctx.lineWidth = isFrontPass ? 1.8 : 1.2;
+					const color = isFrontPass
+						? 'rgba(129, 140, 248, 0.8)'
+						: 'rgba(129, 140, 248, 0.2)';
+
+					let inSeg = false;
+					ctx.beginPath();
+
+					for (let y = 0; y <= H; y++) {
+						const sphereAmp = maxAmp * Math.sin(Math.PI * y / H);
+						const sinVal = Math.sin(omega * y + phase);
+						const isFront = sinVal >= 0;
+						const x = cx + sphereAmp * sinVal;
+
+						if (isFront === isFrontPass) {
+							if (!inSeg) { ctx.moveTo(x, y); inSeg = true; }
+							else { ctx.lineTo(x, y); }
+						} else if (inSeg) {
+							ctx.strokeStyle = color;
+							ctx.stroke();
+							ctx.beginPath();
+							inSeg = false;
+						}
+					}
+					if (inSeg) {
+						ctx.strokeStyle = color;
+						ctx.stroke();
+					}
+				}
+
+				requestAnimationFrame(draw);
+			}
+
+			requestAnimationFrame(draw);
+		}
+
+		function initHelices() {
+			const canvases = document.querySelectorAll('.helix-canvas');
+			const isAnimated = document.documentElement.classList.contains('header-animated');
+			const delay = isAnimated ? 0 : 3500;
+			canvases.forEach(function (c) {
+				setTimeout(function () { startHelix(c); }, delay);
+			});
+		}
+
+		initHelices();
+		document.addEventListener('astro:after-swap', initHelices);
+	})();
+
+	(function () {
+		if (window.__cursorGlowInit) return;
+		window.__cursorGlowInit = true;
+
+		const glow = document.createElement('div');
+		glow.id = 'cursor-glow';
+
+		function appendGlow() {
+			if (!document.body.contains(glow)) document.body.appendChild(glow);
+		}
+
+		document.addEventListener('DOMContentLoaded', appendGlow);
+		document.addEventListener('astro:after-swap', appendGlow);
+
+		document.addEventListener('mousemove', function (e) {
+			glow.style.left = e.clientX + 'px';
+			glow.style.top = e.clientY + 'px';
+			glow.style.opacity = '1';
+		});
+
+		document.addEventListener('mouseleave', function () {
+			glow.style.opacity = '0';
+		});
+	})();
 </script>
 
 <!-- Global Metadata -->
@@ -28,6 +161,7 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<ClientRouter />
 
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />

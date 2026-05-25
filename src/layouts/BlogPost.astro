@@ -8,9 +8,9 @@ import Footer from '../components/Footer.astro';
 import SocialMediaLine from '../components/SocialMediaLine.astro';
 import { EMAIL } from '../consts';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & { readingTime?: number };
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
 ---
 
 <html lang="en">
@@ -49,20 +49,37 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
 			}
+			.reading-time {
+				margin-left: 0.4em;
+				font-size: 0.9em;
+				color: rgb(var(--gray));
+			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			#reading-progress {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 0%;
+				height: 3px;
+				background: linear-gradient(to right, var(--accent-dark), var(--accent));
+				z-index: 200;
+				transition: width 0.1s linear;
 			}
 		</style>
 	</head>
 
 	<body>
+		<div id="reading-progress"></div>
 		<Header />
 		<main>
 			<article>
-				<div class="prose">
+				<div class="prose prose-invert">
 					<div class="title">
 						<div class="date">
 							<FormattedDate date={pubDate} />
+							{readingTime && <span class="reading-time">· {readingTime} min read</span>}
 							{
 								updatedDate && (
 									<div class="last-updated-on">
@@ -78,10 +95,33 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 				</div>
 			</article>
 		</main>
-		<div class="sticky-container">
+		<div class="sticky-container" transition:persist="sticky-sidebar">
 			<SocialMediaLine />
 			<EmailLine email={EMAIL} />
 		</div>
 		<Footer />
+	<script>
+		let progressHandler: (() => void) | null = null;
+
+		document.addEventListener('astro:page-load', () => {
+			if (progressHandler) {
+				window.removeEventListener('scroll', progressHandler);
+				progressHandler = null;
+			}
+
+			const bar = document.getElementById('reading-progress') as HTMLElement | null;
+			if (!bar) return;
+
+			bar.style.width = '0%';
+
+			progressHandler = () => {
+				const scrolled = window.scrollY;
+				const total = document.documentElement.scrollHeight - window.innerHeight;
+				bar.style.width = total > 0 ? `${(scrolled / total) * 100}%` : '0%';
+			};
+
+			window.addEventListener('scroll', progressHandler, { passive: true });
+		});
+	</script>
 	</body>
 </html>

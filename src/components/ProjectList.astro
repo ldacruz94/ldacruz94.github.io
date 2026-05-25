@@ -25,7 +25,7 @@ const typeColors: Record<string, string> = {
 		const accent = typeColors[colorKey] ?? "#2337ff";
 		return (
 			<li
-				class="project-item"
+				class="project-item scroll-reveal"
 				data-type={project.type}
 				data-technologies={project.technologies.join(",")}
 				style={`--card-accent: ${accent};`}
@@ -96,7 +96,7 @@ const typeColors: Record<string, string> = {
 	}
 
 	.card-inner:hover {
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 24px color-mix(in srgb, var(--card-accent) 22%, transparent);
 		border-color: rgba(255, 255, 255, 0.13);
 		transform: translateY(-2px);
 	}

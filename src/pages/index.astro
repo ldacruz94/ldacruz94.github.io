@@ -6,6 +6,12 @@ import EmailLine from '../components/EmailLine.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, EMAIL } from '../consts';
 import "../styles/about.css";
 import Footer from '../components/Footer.astro';
+
+const stack = [
+	'Python', 'Java', 'TypeScript', 'REST APIs', 'Azure',
+	'Kubernetes', 'Docker', 'CI/CD', 'SQL', 'Playwright',
+	'Distributed Systems', 'IoT', 'AI',
+];
 ---
 
 <!doctype html>
@@ -17,37 +23,102 @@ import Footer from '../components/Footer.astro';
 		<Header />
 		<main>
 			<section id="about_section">
-				<h5 class="delay_order1"><span class="wave-emoji">👋🏼</span> Hi, there! I'm <b>Lucas Da Cruz</b>.</h5> 
+				<h5 class="delay_order1" id="greeting-h5"><span class="wave-emoji">👋🏼</span><span id="typewriter-target"> Hi, I'm <b>Lucas Da Cruz</b>.</span></h5>
+
 				<p class="delay_order2">
-					I am a Software Engineer with 4+ years of experience specializing in backend development, API design, and distributed systems. 
-					Beyond backend, I have hands-on experience building modern frontends and implementing DevSecOps solutions. 
-					My main focus is on building scalable, efficient applications while exploring emerging technologies like AI, robotics, and cloud computing.
+					I'm a Software Engineer with 4+ years of experience in backend development, API design,
+					and distributed systems. I'm drawn to building things that are scalable and reliable,
+					and I'm always exploring what's next in AI, cloud, and robotics.
 				</p>
+
 				<p class="delay_order3">
-					At <a class="underline" href="https://www.ecolab.com/" target="_blank">Ecolab</a>, I've delivered impactful solutions across the full stack. 
-					I contributed to distributed IoT systems processing real-time data from tens of thousands of devices with automated alerting capabilities. 
-					Building RESTful APIs and microservices, I enhanced system performance and reliability.
-					On the frontend, I co-led the delivery of an Executive Business Review application serving 300+ global account managers. 
-					I also built infrastructure and developer tooling to improve engineering velocity and system observability.
+					At <a class="underline" href="https://www.ecolab.com/" target="_blank">Ecolab</a> I work as an
+					AI Engineer, and have previously worked across distributed IoT systems and developer tooling.
+					On the side, I freelance with startups on interesting problems, most recently at
+					<a class="underline" href="https://www.torchlight.care/" target="_blank">Torchlight</a>.
 				</p>
+
 				<p class="delay_order4">
-					Beyond my full-time work, I engage in freelance projects with startups and small businesses, delivering automation solutions that drive operational efficiency. 
-					At <a class="underline" href="https://www.torchlight.care/" target="_blank">Torchlight</a>, I modernized their test automation by migrating legacy Selenium suites to Playwright, 
-					significantly improving reliability and reducing test runtime. I also developed Python tools for concurrent link auditing and built automated report generation mechanisms 
-					that reduced manual reporting time from days to just hours.
+					Outside of work I spend my time <a href="/library">reading</a>, cooking, blogging,
+					and being a dad to three kids alongside my wife.
+					Take a look at my <a href="/projects">projects</a> if you want to see what I've been building.
 				</p>
-				<p class="delay_order5">
-					During my free time, I enjoy learning new technologies, <a href="/library">reading books</a>, blogging, cooking, and spending time
-					with my wife and three kids. Check out my <a href="/projects">projects page</a> to see more of the work I'm passionate about -
-					from backend systems and frontend applications to infrastructure and developer tools.
-				</p>
+
+				<div class="stack delay_order5">
+					{stack.map((tech) => (
+						<span class="stack-tag">{tech}</span>
+					))}
+				</div>
 			</section>
 		</main>
 
-		<div class="sticky-container">
+		<div class="sticky-container" transition:persist="sticky-sidebar">
 			<SocialMediaLine />
 			<EmailLine email={EMAIL} />
-		</div>	
-		<Footer />	
+		</div>
+		<Footer />
+		<script>
+			function initTypewriter() {
+				const target = document.getElementById('typewriter-target');
+				if (!target) return;
+
+				if (document.documentElement.classList.contains('header-animated')) {
+					if (!target.innerHTML.trim()) {
+						target.innerHTML = " Hi, I'm <b>Lucas Da Cruz</b>.";
+					}
+					return;
+				}
+
+				const h5 = target.closest('h5') as HTMLElement | null;
+				if (h5) { h5.style.opacity = '1'; h5.style.animation = 'none'; }
+
+				target.innerHTML = '';
+				const cursor = document.createElement('span');
+				cursor.className = 'tw-cursor';
+				target.appendChild(cursor);
+
+				const parts = [
+					{ text: " Hi, I'm ", bold: false },
+					{ text: 'Lucas Da Cruz', bold: true },
+					{ text: '.', bold: false },
+				];
+
+				let pi = 0, ci = 0;
+
+				function tick() {
+					if (pi >= parts.length) {
+						setTimeout(() => cursor.remove(), 600);
+						return;
+					}
+					const part = parts[pi];
+
+					if (ci === 0 && part.bold) {
+						target!.insertBefore(document.createElement('b'), cursor);
+					}
+
+					const char = part.text[ci];
+					if (part.bold) {
+						const boldEl = cursor.previousElementSibling as HTMLElement | null;
+						if (boldEl?.tagName === 'B') boldEl.textContent += char;
+					} else {
+						const prev = cursor.previousSibling;
+						if (prev?.nodeType === Node.TEXT_NODE) {
+							prev.textContent! += char;
+						} else {
+							target!.insertBefore(document.createTextNode(char), cursor);
+						}
+					}
+
+					ci++;
+					if (ci >= part.text.length) { pi++; ci = 0; }
+					setTimeout(tick, 55);
+				}
+
+				setTimeout(tick, 600);
+			}
+
+			initTypewriter();
+			document.addEventListener('astro:page-load', initTypewriter);
+		</script>
 	</body>
 </html>

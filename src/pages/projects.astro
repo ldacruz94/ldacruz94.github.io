@@ -54,7 +54,7 @@ const projects = [...professionalProjects, ...freelanceProjects, ...personalProj
 				<ProjectList projects={projects} />
 			</section>
 		</main>
-		<div class="sticky-container">
+		<div class="sticky-container" transition:persist="sticky-sidebar">
 			<SocialMediaLine />
 			<EmailLine email={EMAIL} />
 		</div>

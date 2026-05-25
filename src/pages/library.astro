@@ -6,6 +6,9 @@ import SocialMediaLine from "../components/SocialMediaLine.astro";
 import EmailLine from "../components/EmailLine.astro";
 import { books } from "../data/books";
 import { EMAIL } from "../consts";
+
+const allTags = Array.from(new Set(books.flatMap((b) => b.tags))).sort();
+const totalBooks = books.length;
 ---
 
 <html lang="en">
@@ -28,18 +31,86 @@ import { EMAIL } from "../consts";
 			.title h1 {
 				margin: 0 0 0.5em 0;
 			}
+
+			/* Filter pills */
+			.filter-bar {
+				margin-bottom: 0.75em;
+				display: flex;
+				flex-direction: column;
+				gap: 0.6em;
+			}
+			.filter-label {
+				font-size: 0.8em;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: rgb(var(--gray));
+			}
+			.pill-group {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4em;
+			}
+			.pill {
+				padding: 0.3em 0.85em;
+				border-radius: 999px;
+				border: 1.5px solid rgba(255, 255, 255, 0.12);
+				background: transparent;
+				color: rgb(var(--gray-dark));
+				font-size: 0.82em;
+				font-weight: 500;
+				cursor: pointer;
+				transition: all 0.15s ease;
+				font-family: inherit;
+				line-height: 1.5;
+			}
+			.pill:hover {
+				border-color: var(--accent);
+				color: var(--accent);
+			}
+			.pill.active {
+				background: var(--accent);
+				border-color: var(--accent);
+				color: #fff;
+			}
+
+			/* Book count */
+			.book-count {
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+				margin: 0 0 1.25em 0;
+			}
+
+			/* Empty state */
+			.empty-state {
+				display: none;
+				text-align: center;
+				padding: 3em 1em;
+				color: rgb(var(--gray));
+				font-size: 0.95em;
+			}
+
+			/* Book list */
 			.book-list {
 				list-style: none;
 				padding: 0;
 				margin: 0;
 				display: flex;
 				flex-direction: column;
-				gap: 2em;
+				gap: 0;
 			}
 			.book-item {
 				display: flex;
 				flex-direction: column;
 				gap: 1em;
+				padding: 1.25em 0.75em;
+				border-radius: 8px;
+				border-left: 3px solid transparent;
+				transition: background 0.2s ease, border-color 0.2s ease;
+			}
+			.book-item:hover {
+				background: rgba(129, 140, 248, 0.04);
+				border-left-color: var(--accent);
 			}
 			.book-content {
 				display: flex;
@@ -47,18 +118,32 @@ import { EMAIL } from "../consts";
 				gap: 1em;
 			}
 			.book-image {
-				width: 150px;
+				width: 120px;
+				flex-shrink: 0;
 				height: auto;
 				border-radius: 4px;
 				box-shadow: var(--box-shadow);
+				transition: transform 0.2s ease;
+			}
+			.book-item:hover .book-image {
+				transform: scale(1.02);
 			}
 			.book-details {
 				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 0.4em;
+			}
+			.book-title-row {
+				display: flex;
+				align-items: center;
+				gap: 0.6em;
+				flex-wrap: wrap;
 			}
 			.book-details h4 {
-				margin: 0 0 0.5em 0;
-				font-size: 1rem; /* Smaller title */
-                font-weight: bold;
+				margin: 0;
+				font-size: 1rem;
+				font-weight: bold;
 			}
 			.book-details a {
 				color: rgb(var(--accent));
@@ -67,25 +152,64 @@ import { EMAIL } from "../consts";
 			.book-details a:hover {
 				text-decoration: underline;
 			}
+			.status-badge {
+				display: inline-block;
+				padding: 0.15em 0.55em;
+				border-radius: 999px;
+				font-size: 0.7em;
+				font-weight: 700;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				background: rgba(66, 224, 150, 0.15);
+				color: #1faf72;
+				border: 1px solid rgba(66, 224, 150, 0.25);
+				white-space: nowrap;
+			}
+			.book-rating {
+				display: flex;
+				gap: 0.1em;
+				font-size: 0.9em;
+			}
+			.star-filled {
+				color: var(--accent);
+			}
+			.star-empty {
+				color: rgba(255, 255, 255, 0.15);
+			}
+			.book-details p {
+				margin: 0;
+				font-size: 0.9em;
+				line-height: 1.6;
+			}
+			.book-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.35em;
+				margin-top: 0.25em;
+			}
+			.book-tag {
+				display: inline-block;
+				padding: 0.15em 0.55em;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 4px;
+				font-size: 0.75em;
+				color: rgb(var(--gray));
+				background: transparent;
+			}
 			hr {
 				border: none;
-				border-top: 1px solid rgb(var(--gray));
-				margin: 1em 0 0 0;
+				border-top: 1px solid rgba(255, 255, 255, 0.06);
+				margin: 0;
 			}
-			.filter-container {
-				display: flex;
-				align-items: center;
-				margin-bottom: 1em;
-			}
-			.filter-container label {
-				margin-right: 0.5em;
-				font-weight: bold;
-			}
-			.filter-container select {
-				padding: 0.5em;
-				border: 1px solid rgb(var(--gray));
-				border-radius: 4px;
-				font-size: 1em;
+
+			@media (max-width: 480px) {
+				.book-content {
+					flex-direction: column;
+				}
+				.book-image {
+					width: 100%;
+					max-width: 200px;
+				}
 			}
 		</style>
 	</head>
@@ -97,58 +221,95 @@ import { EMAIL } from "../consts";
 				<p>A collection of books I've read and what I've learned from them.</p>
 			</div>
 			<section>
-				<div class="filter-container">
-					<label for="tag-filter">Filter by tag:</label>
-					<select id="tag-filter" onchange="filterBooks(event)">
-						<option value="">All</option>
-						{Array.from(new Set(books.flatMap((book: { tags: string[] }) => book.tags))).map((tag: string) => (
-							<option value={tag}>{tag}</option>
+				<div class="filter-bar">
+					<span class="filter-label">Filter by tag</span>
+					<div class="pill-group" id="tag-pills">
+						<button class="pill active" data-value="">All</button>
+						{allTags.map((tag) => (
+							<button class="pill" data-value={tag}>{tag}</button>
 						))}
-					</select>
+					</div>
 				</div>
 
+				<p class="book-count">
+					Showing <span id="visible-count">{totalBooks}</span> of {totalBooks} books
+				</p>
+
+				<p class="empty-state" id="empty-state">No books match this tag.</p>
+
 				<ul class="book-list" id="book-list">
-					{books
-						.map((book) => (
-							<li class="book-item" data-tags={book.tags.join(',')}>
-								<div class="book-content">
-									<img src={book.image} alt={`Cover of ${book.title}`} class="book-image" />
-									<div class="book-details">
-										<h4><a href={book.link} target="_blank" rel="noopener noreferrer">{book.title} <span class="link-arrow">→</span></a></h4>
-										<p>{book.description}</p>
+					{books.map((book) => (
+						<li class="book-item scroll-reveal" data-tags={book.tags.join(',')}>
+							<div class="book-content">
+								<img src={book.image} alt={`Cover of ${book.title}`} class="book-image" />
+								<div class="book-details">
+									<div class="book-title-row">
+										<h4><a href={book.link} target="_blank" rel="noopener noreferrer">{book.title} →</a></h4>
+										{book.status === 'reading' && (
+											<span class="status-badge">Reading</span>
+										)}
+									</div>
+									<div class="book-rating" aria-label={`${book.rating} out of 5 stars`}>
+										{Array.from({ length: 5 }, (_, i) => (
+											<span class={i < book.rating ? 'star-filled' : 'star-empty'}>★</span>
+										))}
+									</div>
+									<p>{book.description}</p>
+									<div class="book-tags">
+										{book.tags.map((tag) => (
+											<span class="book-tag">{tag}</span>
+										))}
 									</div>
 								</div>
-								<hr />
-							</li>
-						))}
+							</div>
+							<hr />
+						</li>
+					))}
 				</ul>
 			</section>
 		</main>
-		<div class="sticky-container">
+		<div class="sticky-container" transition:persist="sticky-sidebar">
 			<SocialMediaLine />
 			<EmailLine email={EMAIL} />
 		</div>
 		<Footer />
 		<script>
-			declare global {
-				interface Window {
-					filterBooks: (event: any) => void;
-				}
-			}
-			
-			window.filterBooks = function (event) {
-				const filter = event.target.value;
-				const bookItems = document.querySelectorAll(".book-item");
+			let bookFilterController: AbortController | null = null;
 
-				bookItems.forEach((item) => {
-					const tags = item.getAttribute("data-tags")?.split(",") || [];
-					if (!filter || tags.includes(filter)) {
-						(item as HTMLElement).style.display = "flex";
-					} else {
-						(item as HTMLElement).style.display = "none";
-					}
+			function initBookFilter() {
+				if (bookFilterController) bookFilterController.abort();
+				bookFilterController = new AbortController();
+				const { signal } = bookFilterController;
+
+				const pills = document.querySelectorAll<HTMLButtonElement>("#tag-pills .pill");
+				const items = document.querySelectorAll<HTMLElement>(".book-item");
+				const countEl = document.getElementById("visible-count");
+				const emptyEl = document.getElementById("empty-state");
+
+				if (!pills.length) return;
+
+				pills.forEach((pill) => {
+					pill.addEventListener("click", () => {
+						pills.forEach((p) => p.classList.remove("active"));
+						pill.classList.add("active");
+						const filter = pill.dataset.value ?? "";
+
+						let visible = 0;
+						items.forEach((item) => {
+							const tags = item.dataset.tags?.split(",") ?? [];
+							const show = !filter || tags.includes(filter);
+							item.style.display = show ? "" : "none";
+							if (show) visible++;
+						});
+
+						if (countEl) countEl.textContent = String(visible);
+						if (emptyEl) emptyEl.style.display = visible === 0 ? "block" : "none";
+					}, { signal });
 				});
 			}
+
+			initBookFilter();
+			document.addEventListener('astro:page-load', initBookFilter);
 		</script>
 	</body>
 </html>

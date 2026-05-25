@@ -56,10 +56,17 @@ nav a:hover {
     animation-delay: 2s;
 }
 
+#header_library {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    animation-delay: 2.5s;
+}
+
 html.header-animated #header_title a,
 html.header-animated #header_about,
 html.header-animated #header_blog,
-html.header-animated #header_projects {
+html.header-animated #header_projects,
+html.header-animated #header_library {
     opacity: 1;
     animation: none;
 }
