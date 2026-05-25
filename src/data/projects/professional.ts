@@ -8,7 +8,7 @@ export const professionalProjects = [
 			context-aware product recommendations at scale. Built a React frontend for agent-facing workflows and integrated
 			Databricks for large-scale data processing and MLflow for experiment tracking and model lifecycle management.
 		`,
-		technologies: ['Python', 'RAG', 'Databricks', 'MLflow', 'Agentic Engineering', 'React', 'AI/ML'],
+		technologies: ['Python', 'RAG', 'Databricks', 'WebSockets', 'MLflow', 'Agentic Engineering', 'React', 'AI/ML', 'Distributed Systems'],
 		type: 'Professional'
 	},
 	{
@@ -20,7 +20,7 @@ export const professionalProjects = [
             Also, developed a Blazor-based dashboard for visualizing pest detection data and device status.
             Added unit and integration tests to ensure system reliability and performance.
 		`,
-		technologies: ['C#', '.NET Core', 'Azure', 'REST API', 'Microservices', 'Blazor'],
+		technologies: ['C#', '.NET Core', 'Azure', 'REST API', 'Microservices', 'Blazor', 'Distributed Systems'],
 		type: 'Professional'
 	},
 	{
@@ -42,7 +42,7 @@ export const professionalProjects = [
             Implemented asynchronous processing using Azure Functions and Service Bus for improved scalability and reliability.
             Reduced notification processing time by 70% and enhanced system maintainability.
         `,
-        technologies: ['C#', '.NET Core', 'Azure Functions', 'Service Bus'],
+        technologies: ['C#', '.NET Core', 'Azure Functions', 'Service Bus', 'Distributed Systems'],
         type: 'Professional'
     },
     {
@@ -54,7 +54,7 @@ export const professionalProjects = [
             Implemented monitoring solutions to track system performance and identify bottlenecks.
             Enhanced system reliability and reduced downtime through proactive monitoring.
         `,
-        technologies: ['C#', '.NET Core', 'AppDynamics', 'Application Insights'],
+        technologies: ['C#', '.NET Core', 'AppDynamics', 'Application Insights', 'Distributed Systems'],
         type: 'Professional'
     },
     {
