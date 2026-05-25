@@ -14,6 +14,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 ---
 
+<!-- Disable header intro animation after first visit -->
+<script is:inline>
+	if (sessionStorage.getItem('headerAnimated')) {
+		document.documentElement.classList.add('header-animated');
+	} else {
+		sessionStorage.setItem('headerAnimated', '1');
+	}
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

@@ -28,6 +28,15 @@
     animation-delay: 3s;
 }
 
+html.header-animated .delay_order1,
+html.header-animated .delay_order2,
+html.header-animated .delay_order3,
+html.header-animated .delay_order4,
+html.header-animated .delay_order5 {
+    opacity: 1;
+    animation: none;
+}
+
 @keyframes wave {
     0%, 100% { transform: rotate(0deg); }
     50% { transform: rotate(30deg); }
@@ -48,4 +57,9 @@ h5 .wave-emoji {
     opacity: 0;
     animation: fadeIn 1s ease-in-out forwards;
     animation-delay: 1s;
+}
+
+html.header-animated .sticky-container {
+    opacity: 1;
+    animation: none;
 }

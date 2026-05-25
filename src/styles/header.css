@@ -49,6 +49,14 @@ nav a:hover {
     animation-delay: 2s;
 }
 
+html.header-animated #header_title a,
+html.header-animated #header_about,
+html.header-animated #header_blog,
+html.header-animated #header_projects {
+    opacity: 1;
+    animation: none;
+}
+
 @media (max-width: 720px) {
     .external-links {
         display: none;
