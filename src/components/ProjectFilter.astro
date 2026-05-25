@@ -8,92 +8,143 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-const projectTypes = Array.from(new Set(projects.filter((project) => project.type).map((project) => project.type)));
-const projectTechs = Array.from(new Set(projects.flatMap((project) => project.technologies || []))).sort();
+const projectTypes = Array.from(new Set(projects.filter((p) => p.type).map((p) => p.type)));
+const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies || []))).sort();
 ---
 
-<div class="filter-container">
-	<div class="filter-group">
-		<label for="type-filter">Filter by type:</label>
-		<select id="type-filter" onchange="filterProjects(event)">
-			<option value="">All Types</option>
+<div class="filter-bar">
+	<div class="filter-section">
+		<span class="filter-label">Type</span>
+		<div class="pill-group" id="type-pills">
+			<button class="pill active" data-value="">All</button>
 			{projectTypes.map((type: string) => (
-				<option value={type}>{type}</option>
+				<button class="pill" data-value={type}>{type}</button>
 			))}
-		</select>
+		</div>
 	</div>
-	
-	<div class="filter-group">
-		<label for="tech-filter">Filter by technology:</label>
-		<select id="tech-filter" onchange="filterProjects(event)">
-			<option value="">All Technologies</option>
+
+	<div class="filter-section">
+		<span class="filter-label">Technology</span>
+		<div class="pill-group" id="tech-pills">
+			<button class="pill active" data-value="">All</button>
 			{projectTechs.map((tech: string) => (
-				<option value={tech}>{tech}</option>
+				<button class="pill" data-value={tech}>{tech}</button>
 			))}
-		</select>
+		</div>
 	</div>
+
+	<p class="project-count">
+		<span id="visible-count">{projects.length}</span> project{projects.length !== 1 ? "s" : ""}
+	</p>
 </div>
 
 <style>
-	.filter-container {
+	.filter-bar {
+		margin-bottom: 2em;
 		display: flex;
-		align-items: flex-end;
-		margin-bottom: 1.5em;
+		flex-direction: column;
 		gap: 1em;
+	}
+
+	.filter-section {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75em;
 		flex-wrap: wrap;
 	}
 
-	.filter-group {
+	.filter-label {
+		font-size: 0.8em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		padding-top: 0.45em;
+		white-space: nowrap;
+		min-width: 6em;
+	}
+
+	.pill-group {
 		display: flex;
-		flex-direction: column;
+		flex-wrap: wrap;
 		gap: 0.4em;
 	}
 
-	.filter-container label {
-		font-weight: bold;
-		font-size: 0.9em;
-	}
-
-	.filter-container select {
-		padding: 0.6em 1em;
-		border: 2px solid rgb(var(--gray));
-		border-radius: 6px;
-		font-size: 1em;
-		background-color: rgb(var(--gray-light));
+	.pill {
+		padding: 0.3em 0.85em;
+		border-radius: 999px;
+		border: 1.5px solid rgba(255, 255, 255, 0.12);
+		background: transparent;
 		color: rgb(var(--gray-dark));
+		font-size: 0.82em;
 		font-weight: 500;
 		cursor: pointer;
-		transition: all 0.2s ease;
-		appearance: none;
-		background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-		background-repeat: no-repeat;
-		background-position: right 0.7em center;
-		background-size: 1.2em;
-		padding-right: 2.5em;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+		transition: all 0.15s ease;
+		font-family: inherit;
+		line-height: 1.5;
 	}
 
-	.filter-container select:hover {
+	.pill:hover {
 		border-color: rgb(var(--accent));
-		background-color: rgb(var(--gray-light));
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		color: rgb(var(--accent));
 	}
 
-	.filter-container select:focus {
-		outline: none;
+	.pill.active {
+		background: rgb(var(--accent));
 		border-color: rgb(var(--accent));
-		box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+		color: #fff;
 	}
 
-	.filter-container select:hover {
-		border-color: rgb(var(--accent));
-		background-color: rgb(var(--gray-light));
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	}
-
-	.filter-container select:focus {
-		outline: none;
-		border-color: rgb(var(--accent));
-		box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+	.project-count {
+		margin: 0;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
 	}
 </style>
+
+<script>
+	function initFilters() {
+		const typePills = document.querySelectorAll<HTMLButtonElement>("#type-pills .pill");
+		const techPills = document.querySelectorAll<HTMLButtonElement>("#tech-pills .pill");
+		const items = document.querySelectorAll<HTMLElement>(".project-item");
+		const countEl = document.getElementById("visible-count");
+
+		let activeType = "";
+		let activeTech = "";
+
+		function applyFilters() {
+			let visible = 0;
+			items.forEach((item) => {
+				const type = item.dataset.type ?? "";
+				const techs = item.dataset.technologies?.split(",") ?? [];
+				const show =
+					(!activeType || type === activeType) &&
+					(!activeTech || techs.includes(activeTech));
+
+				item.style.display = show ? "" : "none";
+				if (show) visible++;
+			});
+			if (countEl) countEl.textContent = String(visible);
+		}
+
+		typePills.forEach((pill) => {
+			pill.addEventListener("click", () => {
+				typePills.forEach((p) => p.classList.remove("active"));
+				pill.classList.add("active");
+				activeType = pill.dataset.value ?? "";
+				applyFilters();
+			});
+		});
+
+		techPills.forEach((pill) => {
+			pill.addEventListener("click", () => {
+				techPills.forEach((p) => p.classList.remove("active"));
+				pill.classList.add("active");
+				activeTech = pill.dataset.value ?? "";
+				applyFilters();
+			});
+		});
+	}
+
+	initFilters();
+</script>

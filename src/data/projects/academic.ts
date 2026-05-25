@@ -7,7 +7,7 @@ export const academicProjects = [
 			room management, and guest services. The application features a user-friendly interface
 			and backend systems for managing bookings and customer data efficiently.
 		`,
-		technologies: ['Angular', 'Java', 'REST API', 'Database Design', 'Multi-threading', 'Spring Boot', 'SQL'],
+		technologies: ['Angular', 'Java', 'Spring Boot', 'Multithreading', 'SQL'],
 		type: 'Academic'
 	},
 	{
@@ -18,7 +18,7 @@ export const academicProjects = [
 			the most efficient delivery routes. Used advanced algorithmic techniques to minimize
 			travel time and distance while handling multiple constraints and delivery points.
 		`,
-		technologies: ['Python', 'Algorithms', 'Optimization', 'Graph Theory', 'Nearest Neighbor', 'Genetic Algorithms'],
+		technologies: ['Python', 'Graph Theory', 'Nearest Neighbor', 'Genetic Algorithms'],
 		type: 'Academic'
 	},
 	{
@@ -29,7 +29,7 @@ export const academicProjects = [
 			combined with gradient optimization techniques. The model analyzes environmental data and
 			historical patterns to forecast air quality and pollution levels with high accuracy.
 		`,
-		technologies: ['Python', 'Machine Learning', 'Random Forest', 'Gradient Optimization', 'Data Science'],
+		technologies: ['Python', 'Machine Learning', 'Random Forest', 'Gradient Optimization'],
 		type: 'Academic'
 	},
 	{
@@ -40,7 +40,7 @@ export const academicProjects = [
 			comprehensive data cleaning techniques. Preprocessed Walmart sales history dataset, handled missing values,
 			and engineered features to accurately predict sales forecasts across multiple product categories.
 		`,
-		technologies: ['Python', 'Random Forest', 'Data Cleaning', 'Feature Engineering', 'Time Series', 'Machine Learning'],
+		technologies: ['Python', 'Random Forest', 'Data Cleaning', 'Feature Engineering', 'Time Series'],
 		type: 'Academic'
 	},
 ];

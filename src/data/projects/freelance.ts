@@ -7,8 +7,8 @@ export const freelanceProjects = [
 			Significantly improved test reliability, runtime performance, and maintainability.
 			Implemented parallel test execution and better error reporting.
 		`,
-		technologies: ['Playwright', 'Python', 'Testing', 'QA Automation'],
-		type: 'Freelance'
+		technologies: ['Playwright', 'Python', 'QA Automation'],
+		type: 'Professional'
 	},
 	{
 		title: "Government Links Auditing Tool",
@@ -19,20 +19,20 @@ export const freelanceProjects = [
 			Implemented concurrent processing to efficiently scan hundreds of links and identify failures, enabling swift remediation
 			of broken references and ensuring application reliability.
 		`,
-		technologies: ['Python', 'Concurrent Processing', 'Web Scraping', 'Automation', 'Link Auditing'],
-		type: 'Freelance'
+		technologies: ['Python', 'Concurrent Processing', 'Web Scraping'],
+		type: 'Professional'
 	},
 	{
 		title: "Dynamic Report Generation Pipeline",
 		link: "https://www.torchlight.care/",
 		description: `
-			Automated the generation of 80-100 Tableau reports using Selenium that originally required 
-			three resources working for four days to complete. Implemented intelligent report automation 
-			that reduced the entire process to just 3 hours, dramatically improving efficiency and freeing 
+			Automated the generation of 80-100 Tableau reports using Selenium that originally required
+			three resources working for four days to complete. Implemented intelligent report automation
+			that reduced the entire process to just 3 hours, dramatically improving efficiency and freeing
 			up resources for higher-value work.
 		`,
-		technologies: ['Python', 'Selenium', 'Tableau', 'Test Automation', 'Reporting', 'RPA'],
-		type: 'Freelance'
+		technologies: ['Python', 'Selenium', 'Tableau', 'RPA'],
+		type: 'Professional'
 	},
 	{
 		title: "Selenium Test Framework with Page Object Model",
@@ -43,19 +43,19 @@ export const freelanceProjects = [
 			Implemented reusable page objects and utilities to reduce code duplication and improve test readability.
 			The framework enabled the QA team to efficiently write and maintain automated tests for critical business workflows.
 		`,
-		technologies: ['Selenium', 'Python', 'Page Object Model', 'Test Automation', 'QA Framework', 'Design Patterns'],
-		type: 'Freelance'
+		technologies: ['Selenium', 'Python', 'Page Object Model', 'Test Automation'],
+		type: 'Professional'
 	},
 	{
 		title: "Mobile Testing Framework with Appium",
 		link: "#",
 		description: `
-			Led the development of a comprehensive mobile testing framework using Appium to automate testing 
-			of the mobile app's APK. Established best practices and patterns for mobile test automation, enabling 
-			the QA team to efficiently test mobile features across different devices and OS versions. 
+			Led the development of a comprehensive mobile testing framework using Appium to automate testing
+			of the mobile app's APK. Established best practices and patterns for mobile test automation, enabling
+			the QA team to efficiently test mobile features across different devices and OS versions.
 			The framework provided reliable mobile test coverage and accelerated mobile app validation.
 		`,
-		technologies: ['Appium', 'Mobile Testing', 'Python', 'Test Automation', 'APK', 'Mobile QA'],
-		type: 'Freelance'
+		technologies: ['Appium', 'Mobile Testing', 'Python', 'Test Automation'],
+		type: 'Professional'
 	},
 ];

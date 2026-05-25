@@ -11,107 +11,177 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+
+const typeColors: Record<string, string> = {
+	professional: "#818cf8",
+	personal:     "#42e096",
+	academic:     "#f59e0b",
+};
 ---
 
-<ul class="project-list" id="project-list">
-	{projects.map((project) => (
-		<li class="project-item" data-type={project.type} data-technologies={project.technologies.join(",")}>
-			<div class="project-header">
-				<h4 class="project-title">
-					<a href={project.link} target="_blank" rel="noopener noreferrer">
-						{project.title}
-						<span class="link-arrow">→</span>
-					</a>
-				</h4>
-				<span class={`project-type ${project.type.toLowerCase()}`}>{project.type}</span>
-			</div>
-			<p class="project-description">{project.description}</p>
-			<ul class="technologies">
-				{project.technologies.map((tech: string) => (
-					<li class="tech-tag">{tech}</li>
-				))}
-			</ul>
-			<hr />
-		</li>
-	))}
+<ul class="project-grid" id="project-list">
+	{projects.map((project) => {
+		const colorKey = project.type.toLowerCase();
+		const accent = typeColors[colorKey] ?? "#2337ff";
+		return (
+			<li
+				class="project-item"
+				data-type={project.type}
+				data-technologies={project.technologies.join(",")}
+				style={`--card-accent: ${accent};`}
+			>
+				<div class="card-inner">
+					<div class="card-top">
+						<span class={`project-type ${colorKey}`}>{project.type}</span>
+						<a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={project.title}>
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+								<polyline points="15 3 21 3 21 9"/>
+								<line x1="10" y1="14" x2="21" y2="3"/>
+							</svg>
+						</a>
+					</div>
+
+					<h4 class="project-title">
+						<a href={project.link} target="_blank" rel="noopener noreferrer">
+							{project.title}
+						</a>
+					</h4>
+
+					<p class="project-description">{project.description.trim()}</p>
+
+					<ul class="technologies">
+						{project.technologies.map((tech: string) => (
+							<li class="tech-tag">{tech}</li>
+						))}
+					</ul>
+				</div>
+			</li>
+		);
+	})}
 </ul>
 
 <style>
-	.project-list {
+	.project-grid {
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 2em;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.25em;
 	}
+
+	@media (max-width: 560px) {
+		.project-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
 	.project-item {
 		display: flex;
-		flex-direction: column;
-		gap: 0.75em;
 	}
-	.project-header {
+
+	.card-inner {
 		display: flex;
-		align-items: baseline;
+		flex-direction: column;
+		gap: 0.6em;
+		width: 100%;
+		padding: 1.25em 1.25em 1em;
+		border-radius: 10px;
+		border: 1.5px solid rgba(255, 255, 255, 0.07);
+		border-top: 3px solid var(--card-accent);
+		background: rgb(var(--gray-light));
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+	}
+
+	.card-inner:hover {
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+		border-color: rgba(255, 255, 255, 0.13);
+		transform: translateY(-2px);
+	}
+
+	.card-top {
+		display: flex;
+		align-items: center;
 		justify-content: space-between;
-		gap: 1em;
-		flex-wrap: wrap;
 	}
-	.project-title {
-		margin: 0;
-		font-size: 1rem;
-		font-weight: bold;
-	}
-	.project-title a {
-		color: rgb(var(--accent));
-		text-decoration: none;
-	}
-	.project-title a:hover {
-		text-decoration: underline;
-	}
+
 	.project-type {
 		display: inline-block;
-		padding: 0.25em 0.75em;
-		border-radius: 4px;
-		font-size: 0.85em;
-		font-weight: 600;
-		white-space: nowrap;
+		padding: 0.2em 0.6em;
+		border-radius: 999px;
+		font-size: 0.72em;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
 	}
+
 	.project-type.professional {
-		background-color: rgba(var(--accent-rgb), 0.15);
-		color: rgb(var(--accent));
-	}
-	.project-type.freelance {
-		background-color: rgba(136, 206, 250, 0.15);
-		color: #64b3e4;
+		background: rgba(129, 140, 248, 0.15);
+		color: #818cf8;
 	}
 	.project-type.personal {
-		background-color: rgba(167, 243, 208, 0.15);
-		color: #42e096;
+		background: rgba(66, 224, 150, 0.15);
+		color: #1faf72;
 	}
+	.project-type.academic {
+		background: rgba(245, 158, 11, 0.12);
+		color: #c47a0a;
+	}
+
+	.project-link {
+		color: rgb(var(--gray));
+		transition: color 0.15s ease;
+		display: flex;
+		align-items: center;
+	}
+
+	.project-link:hover {
+		color: var(--card-accent);
+	}
+
+	.project-title {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.3;
+	}
+
+	.project-title a {
+		color: rgb(var(--black));
+		text-decoration: none;
+		font-weight: 700;
+		transition: color 0.15s ease;
+	}
+
+	.project-title a:hover {
+		color: var(--card-accent);
+	}
+
 	.project-description {
 		margin: 0;
-		line-height: 1.6;
+		font-size: 0.875em;
+		line-height: 1.65;
+		color: rgb(var(--gray-dark));
+		flex: 1;
 	}
+
 	.technologies {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5em;
-		margin: 0;
+		gap: 0.35em;
+		margin: 0.25em 0 0;
 		padding: 0;
 		list-style: none;
 	}
+
 	.tech-tag {
 		display: inline-block;
-		padding: 0.25em 0.5em;
-		background-color: rgb(var(--gray-light));
-		color: rgb(var(--gray-dark));
-		border-radius: 3px;
-		font-size: 0.9em;
-	}
-	hr {
-		border: none;
-		border-top: 1px solid rgb(var(--gray));
-		margin: 1.5em 0 0 0;
+		padding: 0.2em 0.55em;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 4px;
+		font-size: 0.75em;
+		color: rgb(var(--gray));
+		background: transparent;
 	}
 </style>
