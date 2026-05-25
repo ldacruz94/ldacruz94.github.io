@@ -62,10 +62,10 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 		els.forEach(el => observer.observe(el));
 	}
 
-	initScrollReveal();
 	document.addEventListener('astro:page-load', initScrollReveal);
 </script>
 
+<!-- Sidebar helix animation -->
 <script is:inline>
 	(function () {
 		if (window.__helixInit) return;
@@ -139,7 +139,10 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 		initHelices();
 		document.addEventListener('astro:after-swap', initHelices);
 	})();
+</script>
 
+<!-- Cursor glow -->
+<script is:inline>
 	(function () {
 		if (window.__cursorGlowInit) return;
 		window.__cursorGlowInit = true;
@@ -164,7 +167,10 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 			glow.style.opacity = '0';
 		});
 	})();
+</script>
 
+<!-- Scroll-to-top button -->
+<script is:inline>
 	(function () {
 		if (window.__scrollTopInit) return;
 		window.__scrollTopInit = true;

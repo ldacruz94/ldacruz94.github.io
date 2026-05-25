@@ -1,4 +1,8 @@
-<div class="left-line">
+---
+import SidebarLine from './SidebarLine.astro';
+---
+
+<SidebarLine side="left">
 	<ul class="social-icons">
 		<li>
 			<a href="https://github.com/ldacruz94" target="_blank" rel="noopener noreferrer">
@@ -15,71 +19,9 @@
 			</a>
 		</li>
 	</ul>
-	<div class="line-wrap">
-		<div class="line"></div>
-		<canvas class="helix-canvas" width="20" height="100"></canvas>
-	</div>
-</div>
+</SidebarLine>
 
 <style>
-.left-line {
-	position: fixed;
-	left: 2rem;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	opacity: 0;
-	animation: fadeIn 1s ease-in-out forwards;
-	animation-delay: 2.5s;
-}
-
-:global(html.header-animated) .left-line {
-	opacity: 1;
-	animation: none;
-}
-
-.line-wrap {
-	position: relative;
-	margin-top: 1rem;
-	width: 20px;
-	height: 100px;
-	display: flex;
-	justify-content: center;
-}
-
-.line {
-	width: 2px;
-	height: 100px;
-	background-color: rgb(var(--gray));
-	position: relative;
-	overflow: hidden;
-}
-
-.helix-canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
-	pointer-events: none;
-}
-
-.line::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 0;
-	background: linear-gradient(to top, var(--accent), rgba(129, 140, 248, 0.2));
-	animation: lineColorFill 1.5s ease-out forwards;
-	animation-delay: 3.5s;
-}
-
-@keyframes lineColorFill {
-	from { height: 0; }
-	to { height: 100%; }
-}
-
 .social-icons {
 	list-style: none;
 	padding: 0;
@@ -100,9 +42,5 @@
 .social-icons li a:hover {
 	color: var(--accent);
 	transform: scale(1.2);
-}
-
-:global(html[data-theme="light"]) .line {
-	background-color: rgba(0, 0, 0, 0.15);
 }
 </style>
