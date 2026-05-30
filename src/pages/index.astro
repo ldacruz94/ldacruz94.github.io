@@ -44,10 +44,12 @@ const stack = [
 					Take a look at my <a href="/projects">projects</a> if you want to see what I've been building.
 				</p>
 
-				<div class="stack delay_order5">
-					{stack.map((tech) => (
-						<span class="stack-tag">{tech}</span>
-					))}
+				<div class="marquee-container delay_order5" aria-label="Tech stack">
+					<div class="marquee-track">
+						{[...stack, ...stack].map((tech, i) => (
+							<span class="stack-tag" aria-hidden={i >= stack.length ? "true" : undefined}>{tech}</span>
+						))}
+					</div>
 				</div>
 			</section>
 		</main>
