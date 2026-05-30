@@ -1,20 +1,39 @@
 ---
 import { getCollection } from 'astro:content';
+import { professionalProjects } from '../data/projects/professional';
+import { freelanceProjects } from '../data/projects/freelance';
+import { personalProjects } from '../data/projects/personal';
+import { academicProjects } from '../data/projects/academic';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
+const allProjects = [
+	...professionalProjects,
+	...freelanceProjects,
+	...personalProjects,
+	...academicProjects,
+];
+
 const items = [
-	{ label: 'Home',     url: '/',         group: 'Navigation', description: 'About me'            },
-	{ label: 'Blog',     url: '/blog',     group: 'Navigation', description: 'Writing & thoughts'  },
-	{ label: 'Projects', url: '/projects', group: 'Navigation', description: "What I've built"     },
-	{ label: 'Library',  url: '/library',  group: 'Navigation', description: "Books I've read"     },
+	{ label: 'Home',     url: '/',         group: 'Navigation', description: 'About me'           },
+	{ label: 'Blog',     url: '/blog',     group: 'Navigation', description: 'Writing & thoughts' },
+	{ label: 'Projects', url: '/projects', group: 'Navigation', description: "What I've built"    },
+	{ label: 'Library',  url: '/library',  group: 'Navigation', description: "Books I've read"    },
 	...posts.map(p => ({
 		label:       p.data.title,
 		url:         `/blog/${p.id}/`,
 		group:       'Posts',
 		description: p.data.description,
+	})),
+	...allProjects.map(p => ({
+		label:       p.title,
+		url:         p.link,
+		group:       'Projects',
+		description: p.type,
+		keywords:    p.technologies?.join(' ') ?? '',
+		isExternal:  true,
 	})),
 ];
 ---
@@ -25,7 +44,7 @@ const items = [
 			<svg id="cp-search-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 				<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
 			</svg>
-			<input id="cp-input" type="text" placeholder="Search pages and posts…" autocomplete="off" spellcheck="false" aria-label="Search" />
+			<input id="cp-input" type="text" placeholder="Search pages, posts, projects…" autocomplete="off" spellcheck="false" aria-label="Search" />
 			<button id="cp-close-btn" aria-label="Close palette">Esc</button>
 		</div>
 		<div id="cp-results" role="listbox" aria-label="Results"></div>
@@ -172,6 +191,12 @@ const items = [
 		border-radius: 2px;
 		padding: 0 1px;
 	}
+	:global(.cp-item-ext) {
+		font-size: 0.72em;
+		color: rgb(var(--gray));
+		flex-shrink: 0;
+		opacity: 0.5;
+	}
 	:global(.cp-empty),
 	:global(.cp-hint) {
 		padding: 1.5em 1em;
@@ -258,7 +283,8 @@ const items = [
 			const visible = q
 				? items.filter(i =>
 						i.label.toLowerCase().includes(q) ||
-						(i.description && i.description.toLowerCase().includes(q))
+						(i.description && i.description.toLowerCase().includes(q)) ||
+						(i.keywords && i.keywords.toLowerCase().includes(q))
 					)
 				: items.filter(i => i.group === 'Navigation');
 
@@ -266,7 +292,7 @@ const items = [
 				appendGroup('Navigation', visible, q);
 				const hint = document.createElement('p');
 				hint.className = 'cp-hint';
-				hint.textContent = 'Type to search posts…';
+				hint.textContent = 'Type to search posts and projects…';
 				results.appendChild(hint);
 				return;
 			}
@@ -305,6 +331,10 @@ const items = [
 			a.href = item.url;
 			a.className = 'cp-item';
 			a.setAttribute('role', 'option');
+			if (item.isExternal) {
+				a.target = '_blank';
+				a.rel = 'noopener noreferrer';
+			}
 
 			const body = document.createElement('div');
 			body.className = 'cp-item-body';
@@ -322,6 +352,15 @@ const items = [
 			}
 
 			a.appendChild(body);
+
+			if (item.isExternal) {
+				const ext = document.createElement('span');
+				ext.className = 'cp-item-ext';
+				ext.textContent = '↗';
+				ext.setAttribute('aria-hidden', 'true');
+				a.appendChild(ext);
+			}
+
 			a.addEventListener('mouseenter', () => setSelected(idx));
 			a.addEventListener('click', closePalette);
 			results.appendChild(a);
