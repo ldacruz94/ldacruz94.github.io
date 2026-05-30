@@ -302,3 +302,16 @@ html[data-theme="light"] .prose-invert {
         font-size: 1.2em
     }
 }
+
+/* Theme toggle animation — scoped so it doesn't affect Astro page transitions */
+html[data-transitioning-theme]::view-transition-old(root),
+html[data-transitioning-theme]::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+html[data-transitioning-theme="light"]::view-transition-new(root) {
+    z-index: 9999;
+}
+html[data-transitioning-theme="dark"]::view-transition-old(root) {
+    z-index: 9999;
+}

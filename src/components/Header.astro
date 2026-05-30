@@ -56,12 +56,45 @@ function initHeader() {
 			(moon as HTMLElement).style.display = isLight ? 'block' : 'none';
 		};
 		syncIcons();
-		toggleBtn.addEventListener('click', () => {
+		toggleBtn.addEventListener('click', async () => {
 			const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 			const next = isLight ? 'dark' : 'light';
-			document.documentElement.setAttribute('data-theme', next);
-			localStorage.setItem('theme', next);
-			syncIcons();
+
+			const applyTheme = () => {
+				document.documentElement.setAttribute('data-theme', next);
+				localStorage.setItem('theme', next);
+				syncIcons();
+			};
+
+			if (!(document as any).startViewTransition) {
+				applyTheme();
+				return;
+			}
+
+			const rect = toggleBtn.getBoundingClientRect();
+			const x = Math.round(rect.left + rect.width / 2);
+			const y = Math.round(rect.top + rect.height / 2);
+			const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+			document.documentElement.dataset.transitioningTheme = next;
+			const transition = (document as any).startViewTransition(applyTheme);
+
+			try {
+				await transition.ready;
+				document.documentElement.animate(
+					next === 'dark'
+						? { clipPath: [`circle(${r}px at ${x}px ${y}px)`, `circle(0px at ${x}px ${y}px)`] }
+						: { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
+					{
+						duration: 500,
+						easing: next === 'dark' ? 'ease-in' : 'ease-out',
+						pseudoElement: next === 'dark' ? '::view-transition-old(root)' : '::view-transition-new(root)',
+					}
+				);
+				await transition.finished;
+			} finally {
+				delete document.documentElement.dataset.transitioningTheme;
+			}
 		});
 	}
 
