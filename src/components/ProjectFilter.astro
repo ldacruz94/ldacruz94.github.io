@@ -10,8 +10,16 @@ interface Props {
 const { projects } = Astro.props;
 const projectTypes = Array.from(new Set(projects.filter((p) => p.type).map((p) => p.type)));
 const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies || []))).sort();
+
+const techsByType: Record<string, string[]> = {};
+for (const type of projectTypes) {
+	techsByType[type] = Array.from(
+		new Set(projects.filter((p) => p.type === type).flatMap((p) => p.technologies || []))
+	).sort();
+}
 ---
 
+<script type="application/json" id="techs-by-type" set:html={JSON.stringify(techsByType)}></script>
 <div class="filter-bar">
 	<div class="filter-section">
 		<span class="filter-label">Type</span>
@@ -117,8 +125,27 @@ const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies |
 
 		if (!typePills.length) return;
 
+		const techsByType: Record<string, string[]> = JSON.parse(
+			document.getElementById("techs-by-type")?.textContent ?? "{}"
+		);
+
 		let activeType = "";
 		let activeTech = "";
+
+		function updateTechPills() {
+			const allowed = activeType ? new Set(techsByType[activeType] ?? []) : null;
+			techPills.forEach((pill) => {
+				const val = pill.dataset.value ?? "";
+				if (val === "") return; // always show "All"
+				const visible = !allowed || allowed.has(val);
+				pill.style.display = visible ? "" : "none";
+				if (!visible && pill.classList.contains("active")) {
+					pill.classList.remove("active");
+					techPills[0].classList.add("active"); // reset to "All"
+					activeTech = "";
+				}
+			});
+		}
 
 		function applyFilters() {
 			let visible = 0;
@@ -140,6 +167,7 @@ const projectTechs = Array.from(new Set(projects.flatMap((p) => p.technologies |
 				typePills.forEach((p) => p.classList.remove("active"));
 				pill.classList.add("active");
 				activeType = pill.dataset.value ?? "";
+				updateTechPills();
 				applyFilters();
 			}, { signal });
 		});
