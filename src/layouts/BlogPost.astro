@@ -10,7 +10,7 @@ import { EMAIL } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'] & { readingTime?: number };
 
-const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, readingTime, tags } = Astro.props;
 ---
 
 <html lang="en">
@@ -54,6 +54,25 @@ const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
 				font-size: 0.9em;
 				color: rgb(var(--gray));
 			}
+			.post-tags {
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+				gap: 0.35em;
+				margin-top: 0.75em;
+			}
+			.post-tag {
+				display: inline-block;
+				padding: 0.15em 0.55em;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 4px;
+				font-size: 0.75em;
+				color: rgb(var(--gray));
+				background: transparent;
+			}
+			html[data-theme="light"] .post-tag {
+				border-color: rgba(0, 0, 0, 0.1);
+			}
 			.last-updated-on {
 				font-style: italic;
 			}
@@ -89,6 +108,13 @@ const { title, description, pubDate, updatedDate, readingTime } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
+						{tags && tags.length > 0 && (
+							<div class="post-tags">
+								{tags.map((tag: string) => (
+									<span class="post-tag">{tag}</span>
+								))}
+							</div>
+						)}
 						<hr />
 					</div>
 					<slot />

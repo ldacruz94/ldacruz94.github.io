@@ -2,6 +2,7 @@
 title: 'Graduating!' 
 description: 'Graduating'
 pubDate: 'Sep 15, 2025'
+tags: ['education', 'personal']
 ---
 
 # Reflections

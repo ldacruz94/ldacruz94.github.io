@@ -2,6 +2,7 @@
 title: 'Year-End Learning: My Q4 2024 List' 
 description: 'List of things'
 pubDate: 'Oct 2, 2024'
+tags: ['learning', 'personal']
 ---
 
 ### My List

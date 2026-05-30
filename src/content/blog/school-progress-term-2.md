@@ -2,6 +2,7 @@
 title: 'School Progress: Term 2 2025' 
 description: 'My progress so far after term 2'
 pubDate: 'Jun 26, 2025'
+tags: ['education', 'personal']
 ---
 
 ### Term 2 Recap

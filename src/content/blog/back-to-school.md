@@ -2,6 +2,7 @@
 title: 'Back to School: Why I Went Back' 
 description: 'Exploring my journey of returning to education'
 pubDate: 'Sep 26, 2024'
+tags: ['education', 'career', 'personal']
 ---
 
 ### 📚 Back to School

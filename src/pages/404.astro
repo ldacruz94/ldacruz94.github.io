@@ -1,0 +1,86 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SocialMediaLine from '../components/SocialMediaLine.astro';
+import EmailLine from '../components/EmailLine.astro';
+import { EMAIL } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="404 — Page Not Found" description="This page doesn't exist." />
+		<style>
+			main {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				padding: 6em 1em;
+				min-height: 60vh;
+			}
+			.code {
+				font-size: clamp(5rem, 20vw, 9rem);
+				font-weight: 700;
+				line-height: 1;
+				color: var(--accent);
+				opacity: 0.18;
+				letter-spacing: -0.04em;
+				margin: 0;
+				user-select: none;
+			}
+			.message {
+				margin: 0.5em 0 0.25em 0;
+				color: rgb(var(--black));
+				font-size: 1.4em;
+				font-weight: 700;
+			}
+			.sub {
+				color: rgb(var(--gray));
+				margin: 0 0 2em 0;
+				font-size: 0.95em;
+			}
+			.links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.6em;
+				justify-content: center;
+			}
+			.link-pill {
+				padding: 0.45em 1.1em;
+				border-radius: 999px;
+				border: 1.5px solid rgba(129, 140, 248, 0.3);
+				color: var(--accent);
+				font-size: 0.88em;
+				font-weight: 500;
+				text-decoration: none;
+				transition: background 0.15s ease, border-color 0.15s ease;
+			}
+			.link-pill:hover {
+				background: rgba(129, 140, 248, 0.1);
+				border-color: var(--accent);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<p class="code" aria-hidden="true">404</p>
+			<h1 class="message">Page not found</h1>
+			<p class="sub">Whatever you were looking for isn't here.</p>
+			<nav class="links" aria-label="Site navigation">
+				<a href="/" class="link-pill">Home</a>
+				<a href="/blog" class="link-pill">Blog</a>
+				<a href="/projects" class="link-pill">Projects</a>
+				<a href="/library" class="link-pill">Library</a>
+			</nav>
+		</main>
+		<div class="sticky-container" transition:persist="sticky-sidebar">
+			<SocialMediaLine />
+			<EmailLine email={EMAIL} />
+		</div>
+		<Footer />
+	</body>
+</html>

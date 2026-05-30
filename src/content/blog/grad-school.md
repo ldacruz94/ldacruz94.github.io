@@ -2,6 +2,7 @@
 title: 'On to the next one!' 
 description: 'Accepted to Georgia Tech'
 pubDate: 'Feb 13, 2026'
+tags: ['education', 'career']
 ---
 
 ## New Chapter

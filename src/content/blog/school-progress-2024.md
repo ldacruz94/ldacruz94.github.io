@@ -2,6 +2,7 @@
 title: 'School Progress: 2024' 
 description: 'My progress in school since starting'
 pubDate: 'Nov 29, 2024'
+tags: ['education', 'personal']
 ---
 
 ### Where I'm at
