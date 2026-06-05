@@ -44,6 +44,11 @@ const items = [
 			<svg id="cp-search-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 				<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
 			</svg>
+			<svg id="cp-ai-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+				<path d="M12 2l1.09 3.26L16.5 6.5l-3.41 1.24L12 11l-1.09-3.26L7.5 6.5l3.41-1.24L12 2z"/>
+				<path d="M5 14l.65 1.96L7.6 17l-1.95.65L5 19.6l-.65-1.95L2.4 17l1.95-.65L5 14z"/>
+				<path d="M19 14l.65 1.96L21.6 17l-1.95.65L19 19.6l-.65-1.95L16.4 17l1.95-.65L19 14z"/>
+			</svg>
 			<input id="cp-input" type="text" placeholder="Search pages, posts, projects…" autocomplete="off" spellcheck="false" aria-label="Search" />
 			<button id="cp-close-btn" aria-label="Close palette">Esc</button>
 		</div>
@@ -52,6 +57,7 @@ const items = [
 			<span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
 			<span><kbd>↵</kbd> open</span>
 			<span><kbd>Esc</kbd> close</span>
+			<span id="cp-ai-badge">✦ AI mode</span>
 		</div>
 	</div>
 </div>
@@ -226,6 +232,28 @@ const items = [
 	html[data-theme="light"] #cp-modal {
 		box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(129, 140, 248, 0.08);
 	}
+	#cp-ai-icon {
+		color: var(--accent);
+		flex-shrink: 0;
+		display: none;
+	}
+	#cp-modal.ai-mode #cp-search-icon { display: none; }
+	#cp-modal.ai-mode #cp-ai-icon     { display: block; }
+	#cp-modal.ai-mode {
+		border-color: rgba(129, 140, 248, 0.45);
+		box-shadow: 0 24px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(129,140,248,0.12), 0 0 24px rgba(129,140,248,0.08);
+	}
+	#cp-ai-badge {
+		margin-left: auto;
+		background: rgba(129, 140, 248, 0.1);
+		border: 1px solid rgba(129, 140, 248, 0.2);
+		border-radius: 4px;
+		padding: 0.1em 0.5em;
+		color: var(--accent);
+		display: none;
+		letter-spacing: 0.02em;
+	}
+	#cp-modal.ai-mode #cp-ai-badge { display: inline; }
 </style>
 
 <script define:vars={{ items }}>
@@ -256,6 +284,7 @@ const items = [
 			overlay.setAttribute('aria-hidden', 'true');
 			selectedIdx = -1;
 			flatItems   = [];
+			document.getElementById('cp-modal')?.classList.remove('ai-mode');
 		}
 
 		window.openCommandPalette = openPalette;
@@ -395,7 +424,73 @@ const items = [
 			}
 		}, { signal });
 
-		input.addEventListener('input',  () => renderResults(input.value), { signal });
+		const STOP_WORDS = new Set(['a','an','the','is','in','on','at','to','for','of','and','or','with','has','have','what','where','when','who','how','show','me','find','get','i','that','this','do','did','does','about','any','all','built','using','use']);
+
+		function tokenize(text) {
+			return text.toLowerCase().split(/\W+/).filter(t => t.length > 1 && !STOP_WORDS.has(t));
+		}
+
+		function scoreItem(item, tokens) {
+			let score = 0;
+			const label = item.label.toLowerCase();
+			const desc  = (item.description || '').toLowerCase();
+			const kw    = (item.keywords    || '').toLowerCase();
+			for (const token of tokens) {
+				if (label.includes(token)) score += 3;
+				if (desc.includes(token))  score += 2;
+				if (kw.includes(token))    score += 2;
+			}
+			return score;
+		}
+
+		function renderAIResults(rawQuery) {
+			const modal = document.getElementById('cp-modal');
+			modal?.classList.add('ai-mode');
+			input.placeholder = 'Ask about my work, projects, writing…';
+			results.innerHTML = '';
+			flatItems   = [];
+			selectedIdx = -1;
+
+			if (!rawQuery.trim()) {
+				const hint = document.createElement('p');
+				hint.className = 'cp-hint';
+				hint.textContent = 'Ask anything about my work, projects, or writing…';
+				results.appendChild(hint);
+				return;
+			}
+
+			const tokens = tokenize(rawQuery);
+			if (tokens.length === 0) return;
+
+			const scored = items
+				.map(item => ({ item, score: scoreItem(item, tokens) }))
+				.filter(({ score }) => score > 0)
+				.sort((a, b) => b.score - a.score)
+				.map(({ item }) => item);
+
+			if (scored.length === 0) {
+				const empty = document.createElement('p');
+				empty.className = 'cp-empty';
+				empty.textContent = `Nothing found for "${rawQuery}"`;
+				results.appendChild(empty);
+				return;
+			}
+
+			appendGroup('Results', scored, rawQuery);
+			if (flatItems.length > 0) setSelected(0);
+		}
+
+		input.addEventListener('input', () => {
+			const val = input.value;
+			const modal = document.getElementById('cp-modal');
+			if (val.startsWith('>')) {
+				renderAIResults(val.slice(1).trimStart());
+			} else {
+				modal?.classList.remove('ai-mode');
+				input.placeholder = 'Search pages, posts, projects…';
+				renderResults(val);
+			}
+		}, { signal });
 		closeBtn?.addEventListener('click', closePalette, { signal });
 		overlay.addEventListener('click', (e) => { if (e.target === overlay) closePalette(); }, { signal });
 	}
