@@ -508,4 +508,17 @@ export const books: Book[] = [
 		rating: 4,
 		status: 'finished',
 	},
+	{
+		title: "Machine Learning",
+		image: '/book_images/tom_mitchell_ml.jpg',
+		link: "https://a.co/d/0mlmitchell",
+		description: `Great book! Had some great chapters that made Machine Learning feel more 
+    intuitive. The first two chapters especially helped me think of learning as simply a 
+    search problem. I felt that provided a good high-level way to think about machine learning algorithms. I also enjoyed the chapters on Artifical Neural Networks, Bayensian learning, instance learning, and reinforcement learning. It's cool to see so many variations on how we can have a machine "learn". 
+    `,
+		tags: ['machine learning', 'AI', 'computer science', 'theory'],
+		rating: 5,
+    link: "https://a.co/d/0fgOjodH",
+		status: 'finished',
+	},
 ];
