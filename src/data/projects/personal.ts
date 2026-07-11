@@ -1,5 +1,17 @@
 export const personalProjects = [
 	{
+		title: "Tlsock - TLS Client/Server From Scratch",
+		link: "https://github.com/ldacruz94/tlsock",
+		description: `
+			Building Tlsock, a lightweight TLS client/server implemented from scratch in C++ to understand
+			what actually happens under the hood of a secure connection. Deliberately avoids frameworks that
+			would handle connection management or the handshake for me, implementing the handshake and
+			record layer by hand. A small, focused learning project rather than a general-purpose TLS library.
+		`,
+		technologies: ['C++', 'TLS', 'Networking', 'Cryptography', 'Systems Programming'],
+		type: 'Personal'
+	},
+	{
 		title: "AxiomStream - Event Streaming Platform",
 		link: "https://github.com/ldacruz94/axiomstream",
 		description: `
